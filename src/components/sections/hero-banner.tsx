@@ -57,9 +57,9 @@ const HeroBanner = () => {
         ))}
       </div>
 
-      {/* Hero Banner Content */}
-      <div id="hero-banner" className="relative z-10 h-full w-full py-8 lg:py-12">
-        <div className="relative h-full w-[90%] lg:w-[85%] mx-auto overflow-hidden rounded-2xl bg-transparent shadow-lg">
+      {/* Hero Banner Content with Floating Shadow */}
+      <div id="hero-banner" className="relative z-10 h-full w-full py-8 lg:py-12 px-4 lg:px-8">
+        <div className="relative h-full w-full max-w-[95%] lg:max-w-[90%] mx-auto overflow-hidden rounded-2xl lg:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] transition-shadow duration-300">
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -68,7 +68,7 @@ const HeroBanner = () => {
               }`}
             >
               <video
-                className="h-full w-full object-contain bg-transparent"
+                className="h-full w-full object-cover rounded-2xl lg:rounded-3xl"
                 autoPlay
                 loop
                 muted
@@ -79,7 +79,7 @@ const HeroBanner = () => {
                 Your browser does not support the video tag.
               </video>
               
-              <div className="absolute inset-0 z-10 bg-white/10" aria-hidden="true" />
+              <div className="absolute inset-0 z-10 bg-white/10 rounded-2xl lg:rounded-3xl" aria-hidden="true" />
 
               <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center text-black">
                 <div className="flex flex-col items-center gap-2">
