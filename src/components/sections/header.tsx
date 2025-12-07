@@ -25,9 +25,6 @@ const Header = () => {
 
   return (
     <div onMouseLeave={() => setActiveSubmenu(null)}>
-      {/* Background overlay for header visibility */}
-      <div className="fixed top-0 left-0 right-0 h-[100px] bg-gradient-to-b from-black/20 via-black/10 to-transparent pointer-events-none z-40" />
-      
       {/* Desktop Center Logo */}
       <div className="fixed z-[9990] left-1/2 top-[calc(1.85rem+4px)] -translate-x-1/2 scale-[1.2] hidden lg:flex items-center justify-center h-[27px]">
         <Link href="/" aria-label="Ir para a página inicial/home">
@@ -47,7 +44,7 @@ const Header = () => {
             {/* Mobile Logo */}
             <div className="absolute top-0 left-0 mt-5 ml-1 z-20 lg:hidden">
               <Link href="/" aria-label="Ir para a página inicial/home">
-                <div className="w-[43px] h-[43px] bg-white/60 backdrop-blur-md rounded-full flex items-center justify-center p-2.5 shadow-sm">
+                <div className="w-[43px] h-[43px] bg-[#3d4f3f] rounded-full flex items-center justify-center p-2.5 shadow-sm">
                   <OsklenBrandLogo />
                 </div>
               </Link>
@@ -56,19 +53,19 @@ const Header = () => {
             {/* Navigation Bar */}
             <div
               id="navigationContainer"
-              className="absolute right-0 lg:left-0 w-[calc(100%-3.625rem)] lg:w-[calc(100%-1.9rem)] xll:w-[calc(100%-3.75rem)] 5xl:w-[calc(100%-4rem)] h-[43px] 4xl:h-[30px] my-5 mr-1.5 lg:mx-[15px] xll:mx-[30px] flex items-center justify-between bg-white/60 lg:bg-transparent rounded-full lg:rounded-xl backdrop-blur-[15px] lg:backdrop-filter-none shadow-sm"
+              className="absolute right-0 lg:left-0 w-[calc(100%-3.625rem)] lg:w-[calc(100%-1.9rem)] xll:w-[calc(100%-3.75rem)] 5xl:w-[calc(100%-4rem)] h-[43px] 4xl:h-[30px] my-5 mr-1.5 lg:mx-[15px] xll:mx-[30px] flex items-center justify-between bg-[#3d4f3f] rounded-full lg:rounded-xl shadow-sm"
             >
-              <button className="font-suisse pr-2 py-1 lg:hidden text-[13px] text-black ml-10">Menu</button>
+              <button className="font-suisse pr-2 py-1 lg:hidden text-[13px] text-white ml-10">Menu</button>
 
               {/* Desktop Navigation */}
               <div className="hidden lg:flex z-10">
-                <nav className="flex bg-white/60 backdrop-blur-[12px] rounded-lg px-1 h-7 4xl:h-[30px] items-center shadow-sm">
+                <nav className="flex bg-[#485449] rounded-lg px-1 h-7 4xl:h-[30px] items-center shadow-sm">
                   <ul className="flex flex-row items-center gap-1.5">
                     {navItems.map((item) => (
                       <li key={item} className="flex">
                         <button
                           onMouseEnter={() => setActiveSubmenu(item)}
-                          className="font-suisse font-normal text-[15px] -tracking-[0.02em] text-black hover:bg-white/80 h-[25px] 4xl:h-[26px] px-1.5 xll:px-2.5 rounded-lg transition-colors duration-200"
+                          className="font-suisse font-normal text-[15px] -tracking-[0.02em] text-white hover:bg-white/20 h-[25px] 4xl:h-[26px] px-1.5 xll:px-2.5 rounded-lg transition-colors duration-200"
                         >
                           {item}
                         </button>
@@ -82,7 +79,7 @@ const Header = () => {
               <div id="actionGroup" className="flex items-center ml-auto gap-5 lg:gap-1 h-[43px] lg:h-auto">
                 <button 
                   onClick={() => setSearchOpen(!searchOpen)}
-                  className="font-suisse text-[13px] -tracking-0.02 text-black flex items-center gap-1 lg:hidden"
+                  className="font-suisse text-[13px] -tracking-0.02 text-white flex items-center gap-1 lg:hidden"
                 >
                   <span>Buscar</span>
                   <Search size={16} />
@@ -91,7 +88,7 @@ const Header = () => {
                 {/* Desktop Search Input */}
                 <div className="hidden lg:block relative">
                   <div 
-                    className={`h-7 1xl:h-[28px] bg-white/60 backdrop-blur-xl rounded-lg shadow-sm transition-all duration-300 ${
+                    className={`h-7 1xl:h-[28px] bg-[#485449] rounded-lg shadow-sm transition-all duration-300 ${
                       searchOpen ? 'w-[220px] xl:w-[280px]' : 'w-[94px] xl:w-[120px]'
                     } overflow-hidden`}
                   >
@@ -101,30 +98,30 @@ const Header = () => {
                           type="text"
                           placeholder="Buscar..."
                           autoFocus
-                          className="flex-1 bg-transparent border-none outline-none text-[14px] font-suisse text-black placeholder:text-muted-foreground"
+                          className="flex-1 bg-transparent border-none outline-none text-[14px] font-suisse text-white placeholder:text-gray-300"
                           onBlur={() => setSearchOpen(false)}
                         />
-                        <Search className="w-[16px] h-[16px] text-black flex-shrink-0" />
+                        <Search className="w-[16px] h-[16px] text-white flex-shrink-0" />
                       </div>
                     ) : (
                       <button 
                         onClick={() => setSearchOpen(true)}
                         className="w-full h-full flex items-center justify-between px-2"
                       >
-                        <span className="font-suisse font-normal text-[15px] tracking-[-0.02em] text-black">Buscar</span>
-                        <Search className="w-[16px] h-[16px] text-black" />
+                        <span className="font-suisse font-normal text-[15px] tracking-[-0.02em] text-white">Buscar</span>
+                        <Search className="w-[16px] h-[16px] text-white" />
                       </button>
                     )}
                   </div>
                 </div>
 
-                <a href="/my-account" aria-label="Log in" className="font-suisse hidden lg:flex items-center justify-center w-[32px] h-7 1xl:h-[28px] p-[4px_6px] 4xl:px-[7px] text-black bg-white/60 backdrop-blur-md rounded-lg shadow-sm">
+                <a href="/my-account" aria-label="Log in" className="font-suisse hidden lg:flex items-center justify-center w-[32px] h-7 1xl:h-[28px] p-[4px_6px] 4xl:px-[7px] text-white bg-[#485449] rounded-lg shadow-sm">
                   <User className="w-5 h-5 4xl:w-[18px] 4xl:h-[18px]" />
                 </a>
-                <a href="/wishlist" aria-label="Wishlist" className="font-suisse hidden lg:flex items-center justify-center w-[32px] h-7 1xl:h-[28px] p-[4px_6px] text-black bg-white/60 backdrop-blur-md rounded-lg shadow-sm">
+                <a href="/wishlist" aria-label="Wishlist" className="font-suisse hidden lg:flex items-center justify-center w-[32px] h-7 1xl:h-[28px] p-[4px_6px] text-white bg-[#485449] rounded-lg shadow-sm">
                   <Heart className="w-5 h-5 4xl:w-[18px] 4xl:h-[18px]" />
                 </a>
-                <button aria-label="open cart" className="font-suisse z-10 flex items-center justify-center gap-1 w-12 lm:w-[67px] h-7 4xl:h-[28px] text-[13px] lg:text-[15px] lg:bg-white/60 lg:backdrop-blur-[12px] rounded-lg text-black -tracking-0.02 lg:px-2 shadow-sm">
+                <button aria-label="open cart" className="font-suisse z-10 flex items-center justify-center gap-1 w-12 lm:w-[67px] h-7 4xl:h-[28px] text-[13px] lg:text-[15px] lg:bg-[#485449] rounded-lg text-white -tracking-0.02 lg:px-2 shadow-sm">
                   <span className="hidden lg:block">Bag</span>
                   <ShoppingBag className="w-5 h-5 -mt-px" />
                 </button>
