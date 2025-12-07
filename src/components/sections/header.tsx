@@ -151,7 +151,7 @@ const Header = () => {
                   <div
                     key={item}
                     data-active={activeSubmenu === item}
-                    className="col-start-1 row-start-1 h-full min-h-[384px] p-8 transition-opacity duration-200 opacity-0 pointer-events-none data-[active=true]:opacity-100 data-[active=true]:pointer-events-auto"
+                    className="col-start-1 row-start-1 h-full min-h-[384px] pt-16 lg:pt-20 p-8 transition-opacity duration-200 opacity-0 pointer-events-none data-[active=true]:opacity-100 data-[active=true]:pointer-events-auto"
                   >
                     {/* Placeholder for submenu content */}
                   </div>
