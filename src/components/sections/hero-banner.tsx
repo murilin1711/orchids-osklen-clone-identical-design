@@ -32,9 +32,9 @@ const HeroBanner = () => {
   }, []);
 
   return (
-    <section className="w-full md:relative md:z-10">
-      {/* Background Video (Full Screen, Fixed) */}
-      <div className="fixed inset-0 z-0">
+    <section className="relative w-full h-screen overflow-hidden">
+      {/* Background Video (Blurred, only in hero section) */}
+      <div className="absolute inset-0 z-0">
         {slides.map((slide, index) => (
           <div
             key={`bg-${index}`}
@@ -43,7 +43,7 @@ const HeroBanner = () => {
             }`}
           >
             <video
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover blur-md"
               autoPlay
               loop
               muted
@@ -58,7 +58,7 @@ const HeroBanner = () => {
       </div>
 
       {/* Hero Banner Content */}
-      <div id="hero-banner" className="relative z-10 h-screen w-full py-8 lg:py-12">
+      <div id="hero-banner" className="relative z-10 h-full w-full py-8 lg:py-12">
         <div className="relative h-full w-[90%] lg:w-[85%] mx-auto overflow-hidden rounded-2xl bg-transparent shadow-lg">
           {slides.map((slide, index) => (
             <div
