@@ -25,6 +25,9 @@ const Header = () => {
 
   return (
     <div onMouseLeave={() => setActiveSubmenu(null)}>
+      {/* Background overlay for header visibility */}
+      <div className="fixed top-0 left-0 right-0 h-[100px] bg-gradient-to-b from-black/20 via-black/10 to-transparent pointer-events-none z-40" />
+      
       {/* Desktop Center Logo */}
       <div className="fixed z-[9990] left-1/2 top-[calc(1.85rem+4px)] -translate-x-1/2 scale-[1.2] hidden lg:flex items-center justify-center h-[27px]">
         <Link href="/" aria-label="Ir para a página inicial/home">
@@ -44,7 +47,7 @@ const Header = () => {
             {/* Mobile Logo */}
             <div className="absolute top-0 left-0 mt-5 ml-1 z-20 lg:hidden">
               <Link href="/" aria-label="Ir para a página inicial/home">
-                <div className="w-[43px] h-[43px] bg-white/50 backdrop-blur-md rounded-full flex items-center justify-center p-2.5">
+                <div className="w-[43px] h-[43px] bg-white/60 backdrop-blur-md rounded-full flex items-center justify-center p-2.5 shadow-sm">
                   <OsklenBrandLogo />
                 </div>
               </Link>
@@ -53,19 +56,19 @@ const Header = () => {
             {/* Navigation Bar */}
             <div
               id="navigationContainer"
-              className="absolute right-0 lg:left-0 w-[calc(100%-3.625rem)] lg:w-[calc(100%-1.9rem)] xll:w-[calc(100%-3.75rem)] 5xl:w-[calc(100%-4rem)] h-[43px] 4xl:h-[30px] my-5 mr-1.5 lg:mx-[15px] xll:mx-[30px] flex items-center justify-between bg-white/50 lg:bg-transparent rounded-full lg:rounded-xl backdrop-blur-[15px] lg:backdrop-filter-none"
+              className="absolute right-0 lg:left-0 w-[calc(100%-3.625rem)] lg:w-[calc(100%-1.9rem)] xll:w-[calc(100%-3.75rem)] 5xl:w-[calc(100%-4rem)] h-[43px] 4xl:h-[30px] my-5 mr-1.5 lg:mx-[15px] xll:mx-[30px] flex items-center justify-between bg-white/60 lg:bg-transparent rounded-full lg:rounded-xl backdrop-blur-[15px] lg:backdrop-filter-none shadow-sm"
             >
               <button className="font-suisse pr-2 py-1 lg:hidden text-[13px] text-black ml-10">Menu</button>
 
               {/* Desktop Navigation */}
               <div className="hidden lg:flex z-10">
-                <nav className="flex bg-white/50 backdrop-blur-[12px] rounded-lg px-1 h-7 4xl:h-[30px] items-center">
+                <nav className="flex bg-white/60 backdrop-blur-[12px] rounded-lg px-1 h-7 4xl:h-[30px] items-center shadow-sm">
                   <ul className="flex flex-row items-center gap-1.5">
                     {navItems.map((item) => (
                       <li key={item} className="flex">
                         <button
                           onMouseEnter={() => setActiveSubmenu(item)}
-                          className="font-suisse font-normal text-[15px] -tracking-[0.02em] text-black hover:bg-white/70 h-[25px] 4xl:h-[26px] px-1.5 xll:px-2.5 rounded-lg transition-colors duration-200"
+                          className="font-suisse font-normal text-[15px] -tracking-[0.02em] text-black hover:bg-white/80 h-[25px] 4xl:h-[26px] px-1.5 xll:px-2.5 rounded-lg transition-colors duration-200"
                         >
                           {item}
                         </button>
@@ -88,7 +91,7 @@ const Header = () => {
                 {/* Desktop Search Input */}
                 <div className="hidden lg:block relative">
                   <div 
-                    className={`h-7 1xl:h-[28px] bg-white/50 backdrop-blur-xl rounded-lg transition-all duration-300 ${
+                    className={`h-7 1xl:h-[28px] bg-white/60 backdrop-blur-xl rounded-lg shadow-sm transition-all duration-300 ${
                       searchOpen ? 'w-[220px] xl:w-[280px]' : 'w-[94px] xl:w-[120px]'
                     } overflow-hidden`}
                   >
@@ -115,13 +118,13 @@ const Header = () => {
                   </div>
                 </div>
 
-                <a href="/my-account" aria-label="Log in" className="font-suisse hidden lg:flex items-center justify-center w-[32px] h-7 1xl:h-[28px] p-[4px_6px] 4xl:px-[7px] text-black bg-white/50 backdrop-blur-md rounded-lg">
+                <a href="/my-account" aria-label="Log in" className="font-suisse hidden lg:flex items-center justify-center w-[32px] h-7 1xl:h-[28px] p-[4px_6px] 4xl:px-[7px] text-black bg-white/60 backdrop-blur-md rounded-lg shadow-sm">
                   <User className="w-5 h-5 4xl:w-[18px] 4xl:h-[18px]" />
                 </a>
-                <a href="/wishlist" aria-label="Wishlist" className="font-suisse hidden lg:flex items-center justify-center w-[32px] h-7 1xl:h-[28px] p-[4px_6px] text-black bg-white/50 backdrop-blur-md rounded-lg">
+                <a href="/wishlist" aria-label="Wishlist" className="font-suisse hidden lg:flex items-center justify-center w-[32px] h-7 1xl:h-[28px] p-[4px_6px] text-black bg-white/60 backdrop-blur-md rounded-lg shadow-sm">
                   <Heart className="w-5 h-5 4xl:w-[18px] 4xl:h-[18px]" />
                 </a>
-                <button aria-label="open cart" className="font-suisse z-10 flex items-center justify-center gap-1 w-12 lm:w-[67px] h-7 4xl:h-[28px] text-[13px] lg:text-[15px] lg:bg-white/50 lg:backdrop-blur-[12px] rounded-lg text-black -tracking-0.02 lg:px-2">
+                <button aria-label="open cart" className="font-suisse z-10 flex items-center justify-center gap-1 w-12 lm:w-[67px] h-7 4xl:h-[28px] text-[13px] lg:text-[15px] lg:bg-white/60 lg:backdrop-blur-[12px] rounded-lg text-black -tracking-0.02 lg:px-2 shadow-sm">
                   <span className="hidden lg:block">Bag</span>
                   <ShoppingBag className="w-5 h-5 -mt-px" />
                 </button>
@@ -132,7 +135,7 @@ const Header = () => {
             <div
               id="submenu"
               data-menu-open={activeSubmenu !== null}
-              className="absolute top-5 left-[5.5px] right-[5.5px] lg:left-[15px] lg:right-[15px] xll:left-[30px] xll:right-[30px] lg:w-[calc(100vw_-_1.9rem)] xll:w-[calc(100vw_-_3.75rem)] 5xl:w-[calc(100vw_-_4rem)] rounded-3xl md:rounded-xl bg-white/[0.7] opacity-0 max-h-0 data-[menu-open=true]:opacity-100 data-[menu-open=true]:lg:max-h-96 data-[menu-open=true]:backdrop-blur-[20px] overflow-hidden transition-[max-height,opacity] duration-300 ease-[cubic-bezier(.16,1,.3,1)] h-auto"
+              className="absolute top-5 left-[5.5px] right-[5.5px] lg:left-[15px] lg:right-[15px] xll:left-[30px] xll:right-[30px] lg:w-[calc(100vw_-_1.9rem)] xll:w-[calc(100vw_-_3.75rem)] 5xl:w-[calc(100vw_-_4rem)] rounded-3xl md:rounded-xl bg-white/[0.7] opacity-0 max-h-0 data-[menu-open=true]:opacity-100 data-[menu-open=true]:lg:max-h-96 data-[menu-open=true]:backdrop-blur-[20px] overflow-hidden transition-[max-height,opacity] duration-300 ease-[cubic-bezier(.16,1,.3,1)] h-auto shadow-lg"
               style={{
                 transition: activeSubmenu !== null
                   ? 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0s'
