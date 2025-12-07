@@ -20,6 +20,7 @@ const OsklenBrandLogo = () => {
 
 const Header = () => {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navItems = ["Réveillon", "Men", "Women", "Shoes", "Gifts", "Outlet"];
 
   return (
@@ -76,10 +77,44 @@ const Header = () => {
 
               {/* Action Buttons */}
               <div id="actionGroup" className="flex items-center ml-auto gap-5 lg:gap-1 h-[43px] lg:h-auto">
-                <button className="font-suisse text-[13px] -tracking-0.02 text-black flex items-center gap-1 lg:hidden">
+                <button 
+                  onClick={() => setSearchOpen(!searchOpen)}
+                  className="font-suisse text-[13px] -tracking-0.02 text-black flex items-center gap-1 lg:hidden"
+                >
                   <span>Buscar</span>
                   <Search size={16} />
                 </button>
+                
+                {/* Desktop Search Input */}
+                <div className="hidden lg:block relative">
+                  <div 
+                    className={`h-7 1xl:h-[28px] bg-white/50 backdrop-blur-xl rounded-lg transition-all duration-300 ${
+                      searchOpen ? 'w-[220px] xl:w-[280px]' : 'w-[94px] xl:w-[120px]'
+                    } overflow-hidden`}
+                  >
+                    {searchOpen ? (
+                      <div className="flex items-center h-full px-3 gap-2">
+                        <input
+                          type="text"
+                          placeholder="Buscar..."
+                          autoFocus
+                          className="flex-1 bg-transparent border-none outline-none text-[14px] font-suisse text-black placeholder:text-muted-foreground"
+                          onBlur={() => setSearchOpen(false)}
+                        />
+                        <Search className="w-[16px] h-[16px] text-black flex-shrink-0" />
+                      </div>
+                    ) : (
+                      <button 
+                        onClick={() => setSearchOpen(true)}
+                        className="w-full h-full flex items-center justify-between px-2"
+                      >
+                        <span className="font-suisse font-normal text-[15px] tracking-[-0.02em] text-black">Buscar</span>
+                        <Search className="w-[16px] h-[16px] text-black" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+
                 <a href="/my-account" aria-label="Log in" className="font-suisse hidden lg:flex items-center justify-center w-[32px] h-7 1xl:h-[28px] p-[4px_6px] 4xl:px-[7px] text-black bg-white/50 backdrop-blur-md rounded-lg">
                   <User className="w-5 h-5 4xl:w-[18px] 4xl:h-[18px]" />
                 </a>
@@ -115,18 +150,6 @@ const Header = () => {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* Desktop search Menu */}
-            <div id="searchMenu" className="hidden lg:block sticky z-[60] h-0">
-                <div id="containerMenuSearchInput" className="absolute w-[calc(100%_-_1.9rem)] xll:w-[calc(100%_-_3.75rem)] mx-[15px] xll:mx-[30px] my-5 flex justify-end">
-                    <div id="menuSearchInput" className="relative h-7 1xl:h-[30px] bg-white/50 backdrop-blur-xl rounded-lg w-[94px] xl:w-[180px] hover:w-[220px] transition-all duration-300">
-                        <button className="w-full h-full flex items-center justify-between px-2">
-                           <span className="font-suisse font-normal text-[15px] tracking-[-0.02em]">Buscar</span>
-                           <Search className="w-[18px] h-[18px]" size={16} />
-                        </button>
-                    </div>
-                </div>
             </div>
           </div>
         </div>
