@@ -3,20 +3,7 @@
 import { useState } from "react";
 import Link from 'next/link';
 import { Search, User, Heart, ShoppingBag } from 'lucide-react';
-
-const OsklenBrandLogo = () => {
-  // The SVG path data wjas missing in the scrape. As per instructions,
-  // this is a fallback that renders the brand name as SVG text,
-  // which behaves correctly with scaling and blend modes.
-  return (
-    <svg role="img" className="w-full h-full" viewBox="0 0 88 10">
-      <title>Osklen</title>
-      <text x="50%" y="50%" dominantBaseline="central" textAnchor="middle" fontFamily="var(--font-suisse, sans-serif)" fontSize="10" fontWeight="500" letterSpacing="1" fill="currentColor">
-        OSKLEN
-      </text>
-    </svg>
-  );
-};
+import Image from 'next/image';
 
 const Header = () => {
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
@@ -28,8 +15,14 @@ const Header = () => {
       {/* Desktop Center Logo */}
       <div className="fixed z-[9990] left-1/2 top-[calc(1.85rem+4px)] -translate-x-1/2 scale-[1.2] hidden lg:flex items-center justify-center h-[27px]">
         <Link href="/" aria-label="Ir para a página inicial/home">
-          <div className="w-[87.49px] h-[9.99px] text-white mix-blend-difference">
-            <OsklenBrandLogo />
+          <div className="w-[87.49px] h-[9.99px] text-white mix-blend-difference relative">
+            <Image 
+              src="/logo.svg" 
+              alt="Logo" 
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
         </Link>
       </div>
@@ -44,8 +37,14 @@ const Header = () => {
             {/* Mobile Logo */}
             <div className="absolute top-0 left-0 mt-5 ml-1 z-20 lg:hidden">
               <Link href="/" aria-label="Ir para a página inicial/home">
-                <div className="w-[43px] h-[43px] bg-white/50 backdrop-blur-md rounded-full flex items-center justify-center p-2.5 shadow-sm">
-                  <OsklenBrandLogo />
+                <div className="w-[43px] h-[43px] bg-white/50 backdrop-blur-md rounded-full flex items-center justify-center p-2.5 shadow-sm relative">
+                  <Image 
+                    src="/logo.svg" 
+                    alt="Logo" 
+                    fill
+                    className="object-contain p-2"
+                    priority
+                  />
                 </div>
               </Link>
             </div>
