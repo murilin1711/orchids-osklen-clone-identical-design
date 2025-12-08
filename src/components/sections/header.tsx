@@ -17,12 +17,12 @@ const Header = () => {
         <Link href="/" aria-label="Ir para a página inicial/home">
           <div className="w-[200px] h-[50px] relative">
             <Image
-              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goias_minas.pdf-removebg-preview-1765224509006.png"
+              src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/ROTEIRO-EUROPA-1765224940227.png"
               alt="Goiás Minas Uniformes Logo"
               fill
               className="object-contain !w-[200px] !h-[326px] !max-w-[200px]"
-              priority />
-
+              priority
+            />
           </div>
         </Link>
       </div>
@@ -39,12 +39,12 @@ const Header = () => {
               <Link href="/" aria-label="Ir para a página inicial/home">
                 <div className="w-[70px] h-[43px] bg-white/50 backdrop-blur-md rounded-lg flex items-center justify-center p-2 shadow-sm relative">
                   <Image
-                    src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goias_minas.pdf-removebg-preview-1765224509006.png"
+                    src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/ROTEIRO-EUROPA-1765224940227.png"
                     alt="Goiás Minas Uniformes Logo"
                     fill
                     className="object-contain p-1"
-                    priority />
-
+                    priority
+                  />
                 </div>
               </Link>
             </div>
