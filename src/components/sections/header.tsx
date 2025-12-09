@@ -30,31 +30,33 @@ const Header = () => {
       <header className="fixed w-full z-50">
         {/* Desktop Header */}
         <div className="hidden lg:flex fixed top-0 left-0 right-0 h-[80px] items-center z-50">
-          {/* Container principal com padding lateral */}
-          <div className="w-full h-full flex items-center justify-between px-8 xl:px-12 2xl:px-16">
+          {/* Container principal - os lados têm largura igual */}
+          <div className="w-full h-full flex items-center">
             
-            {/* Left Navigation - Alinhado à esquerda */}
-            <div 
-              className="flex-1 flex items-center justify-start h-full"
-              onMouseLeave={() => setActiveSubmenu(null)}
-            >
-              <nav className="bg-white/50 backdrop-blur-md rounded-xl h-[40px] items-center shadow-sm flex">
-                <ul className="flex items-center gap-1 px-2">
-                  {navItems.map((item) => (
-                    <li key={item} className="flex">
-                      <button
-                        onMouseEnter={() => setActiveSubmenu(item)}
-                        className="font-suisse font-normal text-[14px] -tracking-[0.02em] text-black hover:bg-white/80 h-[34px] px-3 rounded-lg transition-colors duration-200 whitespace-nowrap"
-                      >
-                        {item}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
+            {/* Lado Esquerdo - ocupa 50% */}
+            <div className="w-1/2 h-full flex items-center justify-end pr-12">
+              <div 
+                className="flex items-center"
+                onMouseLeave={() => setActiveSubmenu(null)}
+              >
+                <nav className="bg-white/50 backdrop-blur-md rounded-xl h-[40px] items-center shadow-sm flex">
+                  <ul className="flex items-center gap-1 px-2">
+                    {navItems.map((item) => (
+                      <li key={item} className="flex">
+                        <button
+                          onMouseEnter={() => setActiveSubmenu(item)}
+                          className="font-suisse font-normal text-[14px] -tracking-[0.02em] text-black hover:bg-white/80 h-[34px] px-3 rounded-lg transition-colors duration-200 whitespace-nowrap"
+                        >
+                          {item}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
             </div>
 
-            {/* Center Logo - Posicionada absolutamente no centro */}
+            {/* Logo Central - posicionada exatamente no meio */}
             <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <Link href="/" aria-label="Ir para a página inicial/home">
                 <div className="flex items-center justify-center">
@@ -70,64 +72,66 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Right Actions - Alinhado à direita */}
-            <div className="flex-1 flex items-center justify-end gap-2 h-full">
-              {/* Search */}
-              <div className="relative">
-                <div
-                  className={`h-[38px] bg-white/50 backdrop-blur-md rounded-lg shadow-sm transition-all duration-300 ${
-                    searchOpen ? 'w-[180px] xl:w-[200px]' : 'w-[90px] xl:w-[100px]'
-                  } overflow-hidden`}
-                >
-                  {searchOpen ? (
-                    <div className="flex items-center h-full px-3 gap-2">
-                      <input
-                        type="text"
-                        placeholder="Buscar..."
-                        autoFocus
-                        className="flex-1 bg-transparent border-none outline-none text-[13px] font-suisse text-black placeholder:text-gray-500"
-                        onBlur={() => setSearchOpen(false)}
-                      />
-                      <Search className="w-[14px] h-[14px] text-black flex-shrink-0" />
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() => setSearchOpen(true)}
-                      className="w-full h-full flex items-center justify-between px-3"
-                    >
-                      <span className="font-suisse font-normal text-[13px] tracking-[-0.02em] text-black">Buscar</span>
-                      <Search className="w-[14px] h-[14px] text-black" />
-                    </button>
-                  )}
+            {/* Lado Direito - ocupa 50% */}
+            <div className="w-1/2 h-full flex items-center justify-start pl-12">
+              <div className="flex items-center gap-2">
+                {/* Search */}
+                <div className="relative">
+                  <div
+                    className={`h-[38px] bg-white/50 backdrop-blur-md rounded-lg shadow-sm transition-all duration-300 ${
+                      searchOpen ? 'w-[180px] xl:w-[200px]' : 'w-[90px] xl:w-[100px]'
+                    } overflow-hidden`}
+                  >
+                    {searchOpen ? (
+                      <div className="flex items-center h-full px-3 gap-2">
+                        <input
+                          type="text"
+                          placeholder="Buscar..."
+                          autoFocus
+                          className="flex-1 bg-transparent border-none outline-none text-[13px] font-suisse text-black placeholder:text-gray-500"
+                          onBlur={() => setSearchOpen(false)}
+                        />
+                        <Search className="w-[14px] h-[14px] text-black flex-shrink-0" />
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => setSearchOpen(true)}
+                        className="w-full h-full flex items-center justify-between px-3"
+                      >
+                        <span className="font-suisse font-normal text-[13px] tracking-[-0.02em] text-black">Buscar</span>
+                        <Search className="w-[14px] h-[14px] text-black" />
+                      </button>
+                    )}
+                  </div>
                 </div>
+
+                {/* Account */}
+                <a
+                  href="/my-account"
+                  aria-label="Log in"
+                  className="font-suisse flex items-center justify-center w-[38px] h-[38px] text-black bg-white/50 backdrop-blur-md rounded-lg shadow-sm hover:bg-white/80 transition-colors"
+                >
+                  <User className="w-4 h-4" />
+                </a>
+
+                {/* Wishlist */}
+                <a
+                  href="/wishlist"
+                  aria-label="Wishlist"
+                  className="font-suisse flex items-center justify-center w-[38px] h-[38px] text-black bg-white/50 backdrop-blur-md rounded-lg shadow-sm hover:bg-white/80 transition-colors"
+                >
+                  <Heart className="w-4 h-4" />
+                </a>
+
+                {/* Cart */}
+                <button
+                  aria-label="open cart"
+                  className="font-suisse flex items-center justify-center gap-2 h-[38px] bg-white/50 backdrop-blur-md rounded-lg text-black px-4 shadow-sm hover:bg-white/80 transition-colors whitespace-nowrap"
+                >
+                  <span className="text-[13px] font-normal tracking-[-0.02em]">Carrinho</span>
+                  <ShoppingCart className="w-4 h-4" />
+                </button>
               </div>
-
-              {/* Account */}
-              <a
-                href="/my-account"
-                aria-label="Log in"
-                className="font-suisse flex items-center justify-center w-[38px] h-[38px] text-black bg-white/50 backdrop-blur-md rounded-lg shadow-sm hover:bg-white/80 transition-colors"
-              >
-                <User className="w-4 h-4" />
-              </a>
-
-              {/* Wishlist */}
-              <a
-                href="/wishlist"
-                aria-label="Wishlist"
-                className="font-suisse flex items-center justify-center w-[38px] h-[38px] text-black bg-white/50 backdrop-blur-md rounded-lg shadow-sm hover:bg-white/80 transition-colors"
-              >
-                <Heart className="w-4 h-4" />
-              </a>
-
-              {/* Cart */}
-              <button
-                aria-label="open cart"
-                className="font-suisse flex items-center justify-center gap-2 h-[38px] bg-white/50 backdrop-blur-md rounded-lg text-black px-4 shadow-sm hover:bg-white/80 transition-colors whitespace-nowrap"
-              >
-                <span className="text-[13px] font-normal tracking-[-0.02em]">Carrinho</span>
-                <ShoppingCart className="w-4 h-4" />
-              </button>
             </div>
           </div>
         </div>
@@ -247,7 +251,7 @@ const Header = () => {
             }
           }}
           onMouseLeave={() => setActiveSubmenu(null)}
-          className="hidden lg:block absolute top-20 left-8 xl:left-12 2xl:left-16 right-8 xl:right-12 2xl:right-16 rounded-xl bg-white/[0.7] backdrop-blur-[20px] opacity-0 max-h-0 data-[menu-open=true]:opacity-100 data-[menu-open=true]:max-h-96 overflow-hidden transition-[max-height,opacity] duration-300 ease-[cubic-bezier(.16,1,.3,1)] shadow-lg z-[55]"
+          className="hidden lg:block absolute top-20 left-0 right-0 mx-auto w-[calc(100%-200px)] max-w-[1200px] rounded-xl bg-white/[0.7] backdrop-blur-[20px] opacity-0 max-h-0 data-[menu-open=true]:opacity-100 data-[menu-open=true]:max-h-96 overflow-hidden transition-[max-height,opacity] duration-300 ease-[cubic-bezier(.16,1,.3,1)] shadow-lg z-[55]"
           style={{
             transition:
               activeSubmenu !== null
