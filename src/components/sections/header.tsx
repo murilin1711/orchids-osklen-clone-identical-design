@@ -30,13 +30,13 @@ const Header = () => {
       <header className="fixed w-full z-50">
         {/* Desktop Header */}
         <div className="hidden lg:flex fixed top-0 left-0 right-0 h-[80px] items-center z-50">
-          {/* Container principal - os lados têm largura igual */}
-          <div className="w-full h-full flex items-center">
+          {/* Container principal */}
+          <div className="w-full h-full flex items-center px-8 xl:px-12 2xl:px-16">
             
-            {/* Lado Esquerdo - ocupa 50% */}
-            <div className="w-1/2 h-full flex items-center justify-end pr-12">
+            {/* Lado Esquerdo */}
+            <div className="flex-1 flex items-center justify-end">
               <div 
-                className="flex items-center"
+                className="mr-12 xl:mr-16 2xl:mr-20 flex items-center"
                 onMouseLeave={() => setActiveSubmenu(null)}
               >
                 <nav className="bg-white/50 backdrop-blur-md rounded-xl h-[40px] items-center shadow-sm flex">
@@ -56,8 +56,8 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Logo Central - posicionada exatamente no meio */}
-            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            {/* Logo Central */}
+            <div className="flex-shrink-0 mx-4 xl:mx-8">
               <Link href="/" aria-label="Ir para a página inicial/home">
                 <div className="flex items-center justify-center">
                   <Image
@@ -72,9 +72,9 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Lado Direito - ocupa 50% */}
-            <div className="w-1/2 h-full flex items-center justify-start pl-12">
-              <div className="flex items-center gap-2">
+            {/* Lado Direito */}
+            <div className="flex-1 flex items-center justify-start">
+              <div className="ml-12 xl:ml-16 2xl:ml-20 flex items-center gap-2">
                 {/* Search */}
                 <div className="relative">
                   <div
@@ -251,7 +251,7 @@ const Header = () => {
             }
           }}
           onMouseLeave={() => setActiveSubmenu(null)}
-          className="hidden lg:block absolute top-20 left-0 right-0 mx-auto w-[calc(100%-200px)] max-w-[1200px] rounded-xl bg-white/[0.7] backdrop-blur-[20px] opacity-0 max-h-0 data-[menu-open=true]:opacity-100 data-[menu-open=true]:max-h-96 overflow-hidden transition-[max-height,opacity] duration-300 ease-[cubic-bezier(.16,1,.3,1)] shadow-lg z-[55]"
+          className="hidden lg:block absolute top-20 left-8 xl:left-12 2xl:left-16 right-8 xl:right-12 2xl:right-16 rounded-xl bg-white/[0.7] backdrop-blur-[20px] opacity-0 max-h-0 data-[menu-open=true]:opacity-100 data-[menu-open=true]:max-h-96 overflow-hidden transition-[max-height,opacity] duration-300 ease-[cubic-bezier(.16,1,.3,1)] shadow-lg z-[55]"
           style={{
             transition:
               activeSubmenu !== null
