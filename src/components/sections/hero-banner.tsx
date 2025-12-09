@@ -99,7 +99,7 @@ const HeroBanner = () => {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="relative w-full max-w-[90%] mx-auto overflow-hidden rounded-xl shadow-lg h-full">
+        <div className="relative w-full max-w-[90%] mx-auto overflow-hidden rounded-xl shadow-lg aspect-video">
           {slides.map((slide, index) => (
             <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
               {slide.type === 'video' ? (
