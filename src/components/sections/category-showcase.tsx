@@ -17,8 +17,8 @@ const CategoryShowcase = () => {
               role="img" />
 
             <div className="absolute bottom-6 left-6">
-              <div className="bg-white rounded-lg px-6 py-4 shadow-lg">
-                <h2 className="text-black !whitespace-pre-line">Empresarial</h2>
+              <div className="bg-white rounded-lg px-4 py-2 shadow-md">
+                <h3 className="text-blue-600">Empresarial</h3>
               </div>
             </div>
           </div>
@@ -37,8 +37,8 @@ const CategoryShowcase = () => {
               role="img" />
 
             <div className="absolute bottom-6 left-6">
-              <div className="bg-white rounded-lg px-6 py-4 shadow-lg">
-                <h2 className="text-black !whitespace-pre-line !whitespace-pre-line">Personalização</h2>
+              <div className="bg-white rounded-lg px-4 py-2 shadow-md">
+                <h3 className="text-blue-600">Personalização</h3>
               </div>
             </div>
           </div>
