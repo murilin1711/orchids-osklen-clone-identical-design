@@ -92,7 +92,7 @@ const HeroBanner = () => {
   }, [currentSlide, isMuted]);
 
   return (
-    <section className="relative w-full h-screen lg:h-screen overflow-hidden">
+    <section className="relative w-full min-h-[calc(100vh-80px)] lg:min-h-[calc(100vh-120px)] flex items-center justify-center py-8 lg:py-12">
       
       {/* Background Videos */}
       <div className="absolute inset-0 z-0">
@@ -121,15 +121,15 @@ const HeroBanner = () => {
         )}
       </div>
 
-      {/* Slides */}
+      {/* Slides Container */}
       <div 
         id="hero-banner" 
-        className="relative z-10 w-full h-full flex items-center justify-center p-4 md:p-6 lg:p-8"
+        className="relative z-10 w-full h-full max-w-7xl mx-auto px-4 md:px-6 lg:px-8"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="relative w-full h-auto max-w-full md:max-w-[95%] lg:max-w-[90%] overflow-hidden rounded-xl lg:rounded-3xl shadow-lg lg:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow duration-300 aspect-video">
+        <div className="relative w-full h-full max-h-[70vh] md:max-h-[75vh] lg:max-h-[80vh] overflow-hidden rounded-xl lg:rounded-3xl shadow-lg lg:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow duration-300">
           
           {slides.map((slide, index) =>
             <div
