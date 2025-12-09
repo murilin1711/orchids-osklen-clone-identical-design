@@ -28,14 +28,14 @@ const Header = () => {
       <div className={`fixed top-0 left-0 right-0 bg-white z-40 transition-opacity duration-300 !w-full !h-[79px] ${isScrolled ? 'opacity-0' : 'opacity-100'}`} />
       
       <header className="fixed w-full z-50">
-        {/* Desktop Header - Layout centralizado */}
+        {/* Desktop Header */}
         <div className="hidden lg:flex fixed top-0 left-0 right-0 h-[80px] items-center z-50">
-          {/* Container central para todo o conteúdo */}
+          {/* Container principal com padding lateral */}
           <div className="w-full h-full flex items-center justify-between px-8 xl:px-12 2xl:px-16">
             
-            {/* Left Navigation - Lado Esquerdo */}
+            {/* Left Navigation - Alinhado à esquerda */}
             <div 
-              className="flex-1 flex items-center justify-end"
+              className="flex-1 flex items-center justify-start h-full"
               onMouseLeave={() => setActiveSubmenu(null)}
             >
               <nav className="bg-white/50 backdrop-blur-md rounded-xl h-[40px] items-center shadow-sm flex">
@@ -54,10 +54,10 @@ const Header = () => {
               </nav>
             </div>
 
-            {/* Center Logo - Centralizada perfeitamente */}
-            <div className="flex-shrink-0 mx-8 xl:mx-12 2xl:mx-16">
+            {/* Center Logo - Posicionada absolutamente no centro */}
+            <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <Link href="/" aria-label="Ir para a página inicial/home">
-                <div className="flex items-center justify-center h-[80px]">
+                <div className="flex items-center justify-center">
                   <Image
                     src="https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/ROTEIRO_EUROPA-removebg-preview-1765225025878.png"
                     alt="Goiás Minas Uniformes Logo"
@@ -70,8 +70,8 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Right Actions - Lado Direito */}
-            <div className="flex-1 flex items-center justify-start gap-2">
+            {/* Right Actions - Alinhado à direita */}
+            <div className="flex-1 flex items-center justify-end gap-2 h-full">
               {/* Search */}
               <div className="relative">
                 <div
@@ -132,7 +132,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Header Container - Mantido igual */}
+        {/* Mobile Header Container */}
         <div className="lg:hidden fixed top-0 left-0 right-0 h-[80px] flex items-center justify-between px-4">
           {/* Left: Menu Hamburger + Search */}
           <div className="flex items-center gap-2 z-50">
