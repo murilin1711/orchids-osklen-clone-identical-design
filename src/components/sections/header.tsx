@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <>
       {/* White background for header area - only show when not scrolled */}
-      <div className={`fixed top-0 left-0 right-0 h-[80px] bg-white z-40 transition-opacity duration-300 ${isScrolled ? 'opacity-0' : 'opacity-100'}`} />
+      <div className={`fixed top-0 left-0 right-0 bg-white z-40 transition-opacity duration-300 !w-full !h-20 ${isScrolled ? 'opacity-0' : 'opacity-100'}`} />
       
       <header className="fixed w-full z-50">
         {/* Desktop Logo - Center, aligned with nav height */}
@@ -87,47 +87,47 @@ const Header = () => {
         </div>
 
         {/* Mobile Menu Overlay */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 z-40 pt-[80px]">
+        {mobileMenuOpen &&
+        <div className="lg:hidden fixed inset-0 z-40 pt-[80px]">
             <div className="absolute inset-0 bg-black/20 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
             <div className="relative bg-white/95 backdrop-blur-xl w-full max-w-sm mx-auto rounded-b-3xl shadow-2xl p-6">
               <nav>
                 <ul className="space-y-4">
-                  {navItems.filter(item => item).map((item) => (
-                    <li key={item}>
+                  {navItems.filter((item) => item).map((item) =>
+                <li key={item}>
                       <Link
-                        href="#"
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block font-suisse text-[18px] font-medium text-black py-3 px-4 rounded-lg hover:bg-white/80 transition-colors">
+                    href="#"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block font-suisse text-[18px] font-medium text-black py-3 px-4 rounded-lg hover:bg-white/80 transition-colors">
                         {item}
                       </Link>
                     </li>
-                  ))}
+                )}
                 </ul>
               </nav>
             </div>
           </div>
-        )}
+        }
 
         {/* Mobile Search Overlay */}
-        {searchOpen && (
-          <div className="lg:hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-xl pt-[80px] px-4">
+        {searchOpen &&
+        <div className="lg:hidden fixed inset-0 z-[60] bg-white/95 backdrop-blur-xl pt-[80px] px-4">
             <div className="max-w-md mx-auto">
               <div className="flex items-center gap-3 bg-white rounded-full shadow-lg px-4 py-3">
                 <Search size={20} className="text-gray-500" />
                 <input
-                  type="text"
-                  placeholder="Buscar..."
-                  autoFocus
-                  className="flex-1 bg-transparent border-none outline-none text-[16px] font-suisse text-black placeholder:text-gray-500"
-                  onBlur={() => setTimeout(() => setSearchOpen(false), 100)} />
+                type="text"
+                placeholder="Buscar..."
+                autoFocus
+                className="flex-1 bg-transparent border-none outline-none text-[16px] font-suisse text-black placeholder:text-gray-500"
+                onBlur={() => setTimeout(() => setSearchOpen(false), 100)} />
                 <button onClick={() => setSearchOpen(false)} className="text-gray-500">
                   <X size={20} />
                 </button>
               </div>
             </div>
           </div>
-        )}
+        }
 
         {/* Desktop: Left Navigation Section (Floating) - aligned with logo */}
         <div
