@@ -92,7 +92,7 @@ const HeroBanner = () => {
   }, [currentSlide, isMuted]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative w-full h-screen lg:h-screen overflow-hidden">
       
       {/* Background Videos */}
       <div className="absolute inset-0 z-0">
@@ -106,7 +106,7 @@ const HeroBanner = () => {
             >
               <video
                 ref={(el) => {bgVideoRefs.current[index] = el;}}
-                className="h-full w-full object-cover blur-md scale-105"
+                className="h-full w-full object-cover blur-md"
                 autoPlay
                 loop
                 muted={isMuted}
@@ -121,15 +121,15 @@ const HeroBanner = () => {
         )}
       </div>
 
-      {/* Slides Container */}
+      {/* Slides */}
       <div 
         id="hero-banner" 
-        className="relative z-10 w-full h-full flex items-center justify-center p-4 lg:p-8"
+        className="relative z-10 w-full h-auto lg:h-full pt-16 pb-6 px-4 lg:pt-24 lg:pb-8 lg:px-8"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="relative w-full max-w-6xl h-full max-h-[80vh] lg:max-h-[85vh] overflow-hidden rounded-xl lg:rounded-3xl shadow-lg lg:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow duration-300">
+        <div className="relative w-full max-w-[90%] mx-auto lg:max-w-[90%] overflow-hidden rounded-xl lg:rounded-3xl shadow-lg lg:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow duration-300 aspect-video lg:aspect-auto lg:h-full">
           
           {slides.map((slide, index) =>
             <div
@@ -154,60 +154,50 @@ const HeroBanner = () => {
                 <img
                   src={slide.url}
                   className="h-full w-full object-cover rounded-xl lg:rounded-3xl"
-                  alt="Slide"
                 />
               )}
 
               <div className="absolute inset-0 z-10 bg-white/10 rounded-xl lg:rounded-3xl" />
 
-              {/* Title and Link - only if they exist */}
-              {(slide.title || slide.link) && (
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center">
-                  <div className="flex flex-col items-center gap-4">
-                    {slide.title && (
-                      <h1 className="text-4xl lg:text-6xl font-medium tracking-tight text-black !whitespace-pre-line">
-                        {slide.title}
-                      </h1>
-                    )}
-                    {slide.link && (
-                      <a href="#" className="text-sm font-medium tracking-tight underline underline-offset-4 text-black !whitespace-pre-line">
-                        {slide.link}
-                      </a>
-                    )}
-                  </div>
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center">
+                <div className="flex flex-col items-center gap-4">
+                  <h1 className="text-4xl lg:text-6xl font-medium tracking-tight text-black !whitespace-pre-line">
+                    {slide.title}
+                  </h1>
+                  <a href="#" className="text-sm font-medium tracking-tight underline underline-offset-4 text-black !whitespace-pre-line">
+                    {slide.link}
+                  </a>
                 </div>
-              )}
+              </div>
             </div>
           )}
 
-          {/* CTA Button */}
+          {/* CTA */}
           <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-30">
-            <button className="bg-white px-8 py-3 rounded-lg font-bold text-blue-600 hover:bg-white/90 transition-colors duration-200 shadow-lg text-sm lg:text-base">
+            <button className="bg-white px-8 py-3 rounded-lg font-bold text-blue-#2e3092 hover:bg-white/90 transition-colors duration-200 shadow-lg">
               Compre Agora
             </button>
           </div>
 
-          {/* Sound Control */}
+          {/* Controle de Som */}
           {slides[currentSlide].type === 'video' && (
             <button
               onClick={toggleMute}
-              className="absolute bottom-8 right-8 z-30 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors"
-              aria-label={isMuted ? "Ativar som" : "Desativar som"}
+              className="absolute bottom-8 right-8 z-30 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full"
             >
               {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
             </button>
           )}
 
-          {/* Dots Navigation */}
+          {/* Dots */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
             {slides.map((_, index) =>
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 hover:scale-110 ${
-                  index === currentSlide ? 'bg-black w-6' : 'bg-black/30 hover:bg-black/50'
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentSlide ? 'bg-black w-6' : 'bg-black/30'
                 }`}
-                aria-label={`Ir para slide ${index + 1}`}
               />
             )}
           </div>
