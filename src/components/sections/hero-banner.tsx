@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect } from 'react';
+import { Volume2, VolumeX } from 'lucide-react';
 
 const slides = [
 {
-  url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/Venha-nos-fazer-uma-visita-a-equipe-Goias-Minas-esta-pronta-para-te-atender-1765225330226.mp4',
+  url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/Venha-nos-fazer-uma-visita-a-equipe-Goias-Minas-esta-pronta-para-te-atender-1-1765241617616.mp4',
   title: "",
   link: ""
 }];
@@ -12,25 +13,51 @@ const slides = [
 
 const HeroBanner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const bgVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+    // Apply mute state to all videos
+    videoRefs.current.forEach((video) => {
+      if (video) video.muted = !isMuted;
+    });
+    bgVideoRefs.current.forEach((video) => {
+      if (video) video.muted = !isMuted;
+    });
+  };
 
   const handleVideoEnd = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
   useEffect(() => {
-    // Play current video and pause others
+    // Play current video and pause others, keep them synchronized
     videoRefs.current.forEach((video, index) => {
       if (video) {
         if (index === currentSlide) {
           video.currentTime = 0;
+          video.muted = isMuted;
           video.play();
         } else {
           video.pause();
         }
       }
     });
-  }, [currentSlide]);
+    
+    bgVideoRefs.current.forEach((video, index) => {
+      if (video) {
+        if (index === currentSlide) {
+          video.currentTime = 0;
+          video.muted = isMuted;
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    });
+  }, [currentSlide, isMuted]);
 
   return (
     <section className="relative w-full h-screen overflow-hidden">
@@ -44,10 +71,11 @@ const HeroBanner = () => {
           }>
 
             <video
+            ref={(el) => {bgVideoRefs.current[index] = el;}}
             className="h-full w-full object-cover blur-md"
             autoPlay
             loop
-            muted
+            muted={isMuted}
             playsInline
             aria-hidden="true">
 
@@ -71,7 +99,9 @@ const HeroBanner = () => {
               <video
               ref={(el) => {videoRefs.current[index] = el;}}
               className="h-full w-full object-cover rounded-2xl lg:rounded-3xl"
-              muted
+              autoPlay
+              loop
+              muted={isMuted}
               playsInline
               onEnded={handleVideoEnd}
               aria-label={`${slide.title} campaign video background`}>
@@ -102,6 +132,19 @@ const HeroBanner = () => {
               Compre Agora
             </button>
           </div>
+
+          {/* Sound Control Button */}
+          <button
+            onClick={toggleMute}
+            className="absolute bottom-8 right-8 z-30 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200"
+            aria-label={isMuted ? "Ativar som" : "Desativar som"}
+          >
+            {isMuted ? (
+              <VolumeX className="w-5 h-5 text-black" />
+            ) : (
+              <Volume2 className="w-5 h-5 text-black" />
+            )}
+          </button>
 
           {/* Navigation Dots */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
