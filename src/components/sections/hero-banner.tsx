@@ -4,12 +4,25 @@ import { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
 const slides = [
-{
-  url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/Venha-nos-fazer-uma-visita-a-equipe-Goias-Minas-esta-pronta-para-te-atender-1-1765241617616.mp4',
-  title: "",
-  link: ""
-}];
-
+  {
+    type: 'video' as const,
+    url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/Venha-nos-fazer-uma-visita-a-equipe-Goias-Minas-esta-pronta-para-te-atender-1-1765241617616.mp4',
+    title: "",
+    link: ""
+  },
+  {
+    type: 'image' as const,
+    url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goiasminas-1765250868843.jpg?width=8000&height=8000&resize=contain',
+    title: "",
+    link: ""
+  },
+  {
+    type: 'image' as const,
+    url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/Uniforme-escolar-com-qualidade-e-conforto-Apresentamos-as-camisetas-da-Escola-Decisivo-Jun-1765250868958.jpg?width=8000&height=8000&resize=contain',
+    title: "",
+    link: ""
+  }
+];
 
 const HeroBanner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -61,28 +74,30 @@ const HeroBanner = () => {
 
   return (
     <section className="relative w-full h-screen overflow-hidden">
-      {/* Background Video (Blurred, only in hero section) */}
+      {/* Background (Blurred, only for videos) */}
       <div className="absolute inset-0 z-0">
         {slides.map((slide, index) =>
-        <div
-          key={`bg-${index}`}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-          index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`
-          }>
-
-            <video
-            ref={(el) => {bgVideoRefs.current[index] = el;}}
-            className="h-full w-full object-cover blur-md"
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-            aria-hidden="true">
-
-              <source src={slide.url} type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
-          </div>
+          slide.type === 'video' ? (
+            <div
+              key={`bg-${index}`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              <video
+                ref={(el) => {bgVideoRefs.current[index] = el;}}
+                className="h-full w-full object-cover blur-md"
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                aria-hidden="true"
+              >
+                <source src={slide.url} type="video/mp4" />
+              </video>
+              <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
+            </div>
+          ) : null
         )}
       </div>
 
@@ -90,25 +105,35 @@ const HeroBanner = () => {
       <div id="hero-banner" className="relative z-10 h-full w-full pt-24 lg:pt-32 pb-8 lg:pb-12 px-4 lg:px-8">
         <div className="relative h-full w-full max-w-[95%] lg:max-w-[90%] mx-auto overflow-hidden rounded-2xl lg:rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.15)] transition-shadow duration-300">
           {slides.map((slide, index) =>
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`
-            }>
-
-              <video
-              ref={(el) => {videoRefs.current[index] = el;}}
-              className="h-full w-full object-cover rounded-2xl lg:rounded-3xl"
-              autoPlay
-              loop
-              muted={isMuted}
-              playsInline
-              onEnded={handleVideoEnd}
-              aria-label={`${slide.title} campaign video background`}>
-
-                <source src={slide.url} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              {slide.type === 'video' ? (
+                <>
+                  <video
+                    ref={(el) => {videoRefs.current[index] = el;}}
+                    className="h-full w-full object-cover rounded-2xl lg:rounded-3xl"
+                    autoPlay
+                    loop
+                    muted={isMuted}
+                    playsInline
+                    onEnded={handleVideoEnd}
+                    aria-label={`${slide.title} campaign video background`}
+                  >
+                    <source src={slide.url} type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </>
+              ) : (
+                <img
+                  src={slide.url}
+                  alt={slide.title || 'Banner image'}
+                  className="h-full w-full object-cover rounded-2xl lg:rounded-3xl"
+                />
+              )}
               
               <div className="absolute inset-0 z-10 bg-white/10 rounded-2xl lg:rounded-3xl" aria-hidden="true" />
 
@@ -133,36 +158,38 @@ const HeroBanner = () => {
             </button>
           </div>
 
-          {/* Sound Control Button */}
-          <button
-            onClick={toggleMute}
-            className="absolute bottom-8 right-8 z-30 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200"
-            aria-label={isMuted ? "Ativar som" : "Desativar som"}
-          >
-            {isMuted ? (
-              <VolumeX className="w-5 h-5 text-black" />
-            ) : (
-              <Volume2 className="w-5 h-5 text-black" />
-            )}
-          </button>
+          {/* Sound Control Button - Only show for videos */}
+          {slides[currentSlide].type === 'video' && (
+            <button
+              onClick={toggleMute}
+              className="absolute bottom-8 right-8 z-30 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200"
+              aria-label={isMuted ? "Ativar som" : "Desativar som"}
+            >
+              {isMuted ? (
+                <VolumeX className="w-5 h-5 text-black" />
+              ) : (
+                <Volume2 className="w-5 h-5 text-black" />
+              )}
+            </button>
+          )}
 
           {/* Navigation Dots */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
             {slides.map((_, index) =>
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-black w-6' : 'bg-black/30'}`
-              }
-              aria-label={`Go to slide ${index + 1}`} />
-
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentSlide ? 'bg-black w-6' : 'bg-black/30'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
             )}
           </div>
         </div>
       </div>
-    </section>);
-
+    </section>
+  );
 };
 
 export default HeroBanner;
