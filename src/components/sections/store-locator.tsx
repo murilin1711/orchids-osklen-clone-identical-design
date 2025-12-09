@@ -11,7 +11,7 @@ const StoreLocator = () => {
             {/* Left Column: Content */}
             <div className="lg:col-span-2 p-10 lg:p-14 flex flex-col justify-center">
               <div className="bg-background-secondary rounded-lg p-6 lg:p-8 mb-8">
-                <h2 className="text-3xl lg:text-[40px] font-medium text-text-primary mb-6 leading-none tracking-[-0.02em]">Nossa loja
+                <h2 className="text-3xl lg:text-[40px] font-medium text-text-primary mb-6 leading-none tracking-[-0.02em] !whitespace-pre-line">Nossa loja
 
                 </h2>
                 <p className="text-base text-text-secondary leading-tight mb-5 tracking-[-0.02em]">
