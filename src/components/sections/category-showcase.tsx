@@ -38,14 +38,14 @@ const CategoryShowcase = () => {
 
             <div className="absolute bottom-6 left-6">
               <div className="bg-white rounded-lg px-6 py-4 shadow-lg">
-                <h2 className="text-black !whitespace-pre-line">Empresarial</h2>
+                <h2 className="text-black !whitespace-pre-line">Personalização</h2>
               </div>
             </div>
           </div>
         </Link>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default CategoryShowcase;
