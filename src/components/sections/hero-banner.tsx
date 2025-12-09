@@ -96,8 +96,8 @@ const HeroBanner = () => {
 
   return (
     <section className="relative w-full h-screen lg:h-screen overflow-hidden">
-      {/* Background (Blurred, only for videos) - Desktop only */}
-      <div className="absolute inset-0 z-0 hidden lg:block">
+      {/* Background (Blurred, only for videos) - Now visible on mobile too */}
+      <div className="absolute inset-0 z-0">
         {slides.map((slide, index) =>
           slide.type === 'video' ? (
             <div
@@ -126,7 +126,7 @@ const HeroBanner = () => {
       {/* Hero Banner Content - Mobile: aspect-video, Desktop: full height */}
       <div 
         id="hero-banner" 
-        className="relative z-10 w-full h-auto lg:h-full pt-24 pb-8 px-4 lg:pt-32 lg:pb-12 lg:px-8"
+        className="relative z-10 w-full h-auto lg:h-full pt-16 pb-6 px-4 lg:pt-24 lg:pb-8 lg:px-8"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
