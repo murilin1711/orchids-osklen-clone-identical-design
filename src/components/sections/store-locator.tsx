@@ -104,10 +104,6 @@ const StoreLocator = () => {
                 <button className="w-full bg-[#2e3091] text-white py-3 px-6 rounded-xl font-medium hover:bg-[#252a7a] transition-colors duration-300 shadow-lg hover:shadow-xl text-center">
                   Traçar Rota no Waze
                 </button>
-                <p className="text-gray-500 text-sm text-center mt-3">
-                  Clique para abrir no aplicativo de navegação
-                </p>
-              </div>
             </div>
 
             {/* Right Column: Mapa */}
