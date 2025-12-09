@@ -92,7 +92,7 @@ const HeroBanner = () => {
   }, [currentSlide, isMuted]);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden flex items-center justify-center">
+    <section className="relative w-full h-screen lg:h-screen overflow-hidden">
       
       {/* Background Videos */}
       <div className="absolute inset-0 z-0">
@@ -121,15 +121,15 @@ const HeroBanner = () => {
         )}
       </div>
 
-      {/* Slides - Container centralizado */}
+      {/* Slides Container - Ajustado para centralizar no desktop */}
       <div 
         id="hero-banner" 
-        className="relative z-10 w-full max-w-full md:max-w-[95%] lg:max-w-[90%] aspect-video p-4 md:p-6 lg:p-8"
+        className="relative z-10 w-full h-full flex items-start lg:items-center justify-center p-4 md:p-6 lg:p-8"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="relative w-full h-full overflow-hidden rounded-xl lg:rounded-3xl shadow-lg lg:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow duration-300">
+        <div className="relative w-full h-auto max-w-full md:max-w-[95%] lg:max-w-[90%] overflow-hidden rounded-xl lg:rounded-3xl shadow-lg lg:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow duration-300 aspect-video lg:aspect-auto lg:h-[70vh]">
           
           {slides.map((slide, index) =>
             <div
