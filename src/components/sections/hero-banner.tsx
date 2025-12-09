@@ -4,25 +4,25 @@ import { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 
 const slides = [
-{
-  type: 'video' as const,
-  url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/Venha-nos-fazer-uma-visita-a-equipe-Goias-Minas-esta-pronta-para-te-atender-1-1765241617616.mp4',
-  title: "",
-  link: ""
-},
-{
-  type: 'image' as const,
-  url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goiasminas-1765250868843.jpg?width=8000&height=8000&resize=contain',
-  title: "",
-  link: ""
-},
-{
-  type: 'image' as const,
-  url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/Uniforme-escolar-com-qualidade-e-conforto-Apresentamos-as-camisetas-da-Escola-Decisivo-Jun-1765250868958.jpg?width=8000&height=8000&resize=contain',
-  title: "",
-  link: ""
-}];
-
+  {
+    type: 'video' as const,
+    url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/object/public/document-uploads/Venha-nos-fazer-uma-visita-a-equipe-Goias-Minas-esta-pronta-para-te-atender-1-1765241617616.mp4',
+    title: "",
+    link: ""
+  },
+  {
+    type: 'image' as const,
+    url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goiasminas-1765250868843.jpg?width=8000&height=8000&resize=contain',
+    title: "",
+    link: ""
+  },
+  {
+    type: 'image' as const,
+    url: 'https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/Uniforme-escolar-com-qualidade-e-conforto-Apresentamos-as-camisetas-da-Escola-Decisivo-Jun-1765250868958.jpg?width=8000&height=8000&resize=contain',
+    title: "",
+    link: ""
+  }
+];
 
 const HeroBanner = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -77,7 +77,7 @@ const HeroBanner = () => {
         }
       }
     });
-
+    
     bgVideoRefs.current.forEach((video, index) => {
       if (video) {
         if (index === currentSlide) {
@@ -92,70 +92,70 @@ const HeroBanner = () => {
   }, [currentSlide, isMuted]);
 
   return (
-    <section className="relative w-full min-h-[calc(100vh-80px)] md:min-h-[calc(100vh-100px)] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full pt-[80px] md:pt-[100px] min-h-screen flex items-center justify-center overflow-hidden">
       
       {/* Background Videos - Ocupa toda a tela como antes */}
       <div className="absolute inset-0 z-0">
         {slides.map((slide, index) =>
-        slide.type === 'video' ?
-        <div
-          key={`bg-${index}`}
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-          index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`
-          }>
-
+          slide.type === 'video' ? (
+            <div
+              key={`bg-${index}`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
               <video
-            ref={(el) => {bgVideoRefs.current[index] = el;}}
-            className="h-full w-full object-cover blur-md"
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-            aria-hidden="true">
-
+                ref={(el) => {bgVideoRefs.current[index] = el;}}
+                className="h-full w-full object-cover blur-md"
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                aria-hidden="true"
+              >
                 <source src={slide.url} type="video/mp4" />
               </video>
               <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
-            </div> :
-        null
+            </div>
+          ) : null
         )}
       </div>
 
-      {/* Slides Container - Ajustado para ser menor no desktop */}
-      <div
-        id="hero-banner"
-        className="relative z-10 flex items-center justify-center p-4 md:p-6 lg:p-8 !w-full !h-full"
+      {/* Slides Container - Centralizado verticalmente */}
+      <div 
+        id="hero-banner" 
+        className="relative z-10 w-full flex items-center justify-center p-4 md:p-6 lg:p-8"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}>
-
-        <div className="relative w-full max-w-full md:max-w-[85%] lg:max-w-[75%] overflow-hidden rounded-xl lg:rounded-3xl shadow-lg lg:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow duration-300 aspect-video">
+        onTouchEnd={handleTouchEnd}
+      >
+        <div className="relative w-full max-w-full md:max-w-[85%] lg:max-w-[70%] overflow-hidden rounded-xl lg:rounded-3xl shadow-lg lg:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-shadow duration-300 aspect-video">
           
           {slides.map((slide, index) =>
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-            index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`
-            }>
-
-              {slide.type === 'video' ?
-            <video
-              ref={(el) => {videoRefs.current[index] = el;}}
-              className="h-full w-full object-cover rounded-xl lg:rounded-3xl"
-              autoPlay
-              loop
-              muted={isMuted}
-              playsInline
-              onEnded={handleVideoEnd}>
-
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'
+              }`}
+            >
+              {slide.type === 'video' ? (
+                <video
+                  ref={(el) => {videoRefs.current[index] = el;}}
+                  className="h-full w-full object-cover rounded-xl lg:rounded-3xl"
+                  autoPlay
+                  loop
+                  muted={isMuted}
+                  playsInline
+                  onEnded={handleVideoEnd}
+                >
                   <source src={slide.url} type="video/mp4" />
-                </video> :
-
-            <img
-              src={slide.url}
-              className="h-full w-full object-cover rounded-xl lg:rounded-3xl" />
-
-            }
+                </video>
+              ) : (
+                <img
+                  src={slide.url}
+                  className="h-full w-full object-cover rounded-xl lg:rounded-3xl"
+                />
+              )}
 
               <div className="absolute inset-0 z-10 bg-white/10 rounded-xl lg:rounded-3xl" />
 
@@ -180,32 +180,32 @@ const HeroBanner = () => {
           </div>
 
           {/* Controle de Som */}
-          {slides[currentSlide].type === 'video' &&
-          <button
-            onClick={toggleMute}
-            className="absolute bottom-8 right-8 z-30 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full">
-
+          {slides[currentSlide].type === 'video' && (
+            <button
+              onClick={toggleMute}
+              className="absolute bottom-8 right-8 z-30 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full"
+            >
               {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
             </button>
-          }
+          )}
 
           {/* Dots */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
             {slides.map((_, index) =>
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-black w-6' : 'bg-black/30'}`
-              } />
-
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentSlide ? 'bg-black w-6' : 'bg-black/30'
+                }`}
+              />
             )}
           </div>
 
         </div>
       </div>
-    </section>);
-
+    </section>
+  );
 };
 
 export default HeroBanner;
