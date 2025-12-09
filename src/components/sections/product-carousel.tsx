@@ -58,6 +58,34 @@ const products: Product[] = [
   price: "",
   image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/4-removebg-preview-1765247533750.png?width=8000&height=8000&resize=contain",
   image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/4-removebg-preview-1765247533750.png?width=8000&height=8000&resize=contain"
+},
+{
+  id: 8,
+  name: "Villa Galileu",
+  price: "",
+  image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2-removebg-preview-1-1765249932421.png?width=8000&height=8000&resize=contain",
+  image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2-removebg-preview-1-1765249932421.png?width=8000&height=8000&resize=contain"
+},
+{
+  id: 9,
+  name: "DOM",
+  price: "",
+  image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/1-removebg-preview-1-1765249932384.png?width=8000&height=8000&resize=contain",
+  image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/1-removebg-preview-1-1765249932384.png?width=8000&height=8000&resize=contain"
+},
+{
+  id: 10,
+  name: "Colégio Galileu",
+  price: "",
+  image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/3-removebg-preview-1-1765249932104.png?width=8000&height=8000&resize=contain",
+  image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/3-removebg-preview-1-1765249932104.png?width=8000&height=8000&resize=contain"
+},
+{
+  id: 11,
+  name: "Colégio São Francisco de Assis",
+  price: "",
+  image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/4-removebg-preview-1-1765249932417.png?width=8000&height=8000&resize=contain",
+  image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/4-removebg-preview-1-1765249932417.png?width=8000&height=8000&resize=contain"
 }
 ];
 
@@ -75,7 +103,7 @@ const ProductCard = ({ product }: {product: Product;}) =>
         alt={product.name}
         width={320}
         height={427}
-        className="w-full h-full object-contain p-4 opacity-30 transition-all duration-300 group-hover:opacity-50 group-hover:scale-105" />
+        className="w-full h-full object-contain p-4 opacity-30 transition-all duration-300 group-hover:opacity-70 group-hover:scale-105" />
 
         {/* Botão Em Breve */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
