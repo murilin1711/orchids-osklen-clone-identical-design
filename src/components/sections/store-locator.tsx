@@ -19,12 +19,12 @@ const StoreLocator = () => {
 
     map.current = new maplibregl.Map({
       container: mapContainer.current,
-      style: `https://api.maptiler.com/maps/dataviz-light/style.json?key=1gXFt9mkSWAwobaSVONk`,
+      style: "https://api.maptiler.com/maps/bright/style.json?key=1gXFt9mkSWAwobaSVONk",
       center: [empresa.lng, empresa.lat],
       zoom: 16
     });
 
-    // Adiciona controles de zoom
+    // Controles de zoom
     map.current.addControl(new maplibregl.NavigationControl());
 
     // Marcador vermelho
@@ -43,12 +43,10 @@ const StoreLocator = () => {
         <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-5">
             {/* Left Column: Content */}
-            <div className="lg:col-span-2 p-10 lg:p-14 flex flex-col justify-center">
-              <div className="bg-background-secondary rounded-lg p-6 lg:p-8 mb-8">
-                <h2 className="text-3xl lg:text-[40px] font-medium text-text-primary mb-6 leading-none tracking-[-0.02em] !whitespace-pre-line">Nossa loja
-
-                </h2>
-                <p className="text-base text-text-secondary leading-tight mb-5 tracking-[-0.02em]">
+            <div className="lg:col-span-2 p-10 lg:p-14 flex flex-col justify-between">
+              <div className="bg-background-secondary rounded-lg p-6 lg:p-8">
+                <h2 className="text-3xl lg:text-[40px] font-medium text-text-primary mb-6 leading-none tracking-[-0.02em]">Nossa loja</h2>
+                <p className="text-base text-text-secondary leading-tight tracking-[-0.02em]">
                   Digite seu CEP e descubra a loja Osklen mais próxima de você:
                 </p>
               </div>
@@ -61,11 +59,10 @@ const StoreLocator = () => {
             </div>
 
             {/* Right Column: Interactive Map */}
-            <div className="lg:col-span-3 relative min-h-[300px] md:min-h-[400px] lg:min-h-full">
+            <div className="lg:col-span-3 relative h-[400px] lg:h-auto">
               <div 
                 ref={mapContainer} 
-                className="absolute inset-0 w-full h-full rounded-xl"
-                style={{ minHeight: '400px' }}
+                className="w-full h-full rounded-xl"
               />
             </div>
           </div>
