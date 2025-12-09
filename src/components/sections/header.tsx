@@ -39,7 +39,7 @@ const Header = () => {
               <ul className="flex flex-row items-center gap-2">
                 {navItems.map((item) =>
                 item ?
-                <li key={item} className="flex">
+                <li key={item} className="flex !px-0.5">
                       <button
                     onMouseEnter={() => setActiveSubmenu(item)}
                     className="font-suisse font-normal text-[14px] -tracking-[0.02em] text-black hover:bg-white/80 h-[34px] px-3 rounded-lg transition-colors duration-200">
