@@ -33,13 +33,28 @@ const HeroBanner = () => {
   const touchEndX = useRef<number>(0);
 
   const toggleMute = () => {
-    setIsMuted(!isMuted);
+    const newMutedState = !isMuted;
+    setIsMuted(newMutedState);
 
+    // Atualiza o estado de mute para todos os vídeos atuais
     videoRefs.current.forEach((video) => {
-      if (video) video.muted = !isMuted;
+      if (video) {
+        video.muted = newMutedState;
+        // Tenta dar play novamente para garantir que o vídeo continue
+        if (!newMutedState) {
+          video.play().catch(e => console.log("Erro ao dar play no vídeo:", e));
+        }
+      }
     });
+    
     bgVideoRefs.current.forEach((video) => {
-      if (video) video.muted = !isMuted;
+      if (video) {
+        video.muted = newMutedState;
+        // Tenta dar play novamente para garantir que o vídeo continue
+        if (!newMutedState) {
+          video.play().catch(e => console.log("Erro ao dar play no vídeo de fundo:", e));
+        }
+      }
     });
   };
 
@@ -65,13 +80,14 @@ const HeroBanner = () => {
     }
   };
 
+  // Efeito para controlar os slides
   useEffect(() => {
     videoRefs.current.forEach((video, index) => {
       if (video) {
         if (index === currentSlide) {
           video.currentTime = 0;
           video.muted = isMuted;
-          video.play();
+          video.play().catch(e => console.log("Erro ao dar play no vídeo do slide:", e));
         } else {
           video.pause();
         }
@@ -83,13 +99,28 @@ const HeroBanner = () => {
         if (index === currentSlide) {
           video.currentTime = 0;
           video.muted = isMuted;
-          video.play();
+          video.play().catch(e => console.log("Erro ao dar play no vídeo de fundo do slide:", e));
         } else {
           video.pause();
         }
       }
     });
-  }, [currentSlide, isMuted]);
+  }, [currentSlide]);
+
+  // Efeito separado para atualizar o mute quando isMuted muda
+  useEffect(() => {
+    videoRefs.current.forEach((video) => {
+      if (video) {
+        video.muted = isMuted;
+      }
+    });
+    
+    bgVideoRefs.current.forEach((video) => {
+      if (video) {
+        video.muted = isMuted;
+      }
+    });
+  }, [isMuted]);
 
   return (
     <section className="relative w-full pt-[80px] md:pt-[100px] min-h-screen flex items-center justify-center overflow-hidden">
@@ -154,6 +185,7 @@ const HeroBanner = () => {
                 <img
                   src={slide.url}
                   className="h-full w-full object-cover rounded-xl lg:rounded-3xl"
+                  alt="Slide"
                 />
               )}
 
@@ -183,7 +215,7 @@ const HeroBanner = () => {
           {slides[currentSlide].type === 'video' && (
             <button
               onClick={toggleMute}
-              className="absolute bottom-8 right-8 z-30 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full"
+              className="absolute bottom-8 right-8 z-30 w-10 h-10 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full hover:bg-white transition-colors duration-200"
             >
               {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
             </button>
