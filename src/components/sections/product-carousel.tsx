@@ -46,10 +46,10 @@ const ProductCard = ({ product }: {product: Product;}) =>
         alt={product.name}
         width={320}
         height={427}
-        className="w-full h-full object-contain p-8 opacity-30 transition-all duration-300 group-hover:opacity-50 group-hover:scale-105" />
+        className="w-full h-full object-contain p-4 opacity-30 transition-all duration-300 group-hover:opacity-50 group-hover:scale-105" />
 
         {/* Botão Em Breve */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
           <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg text-sm font-medium transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg">
             Em breve
           </button>
