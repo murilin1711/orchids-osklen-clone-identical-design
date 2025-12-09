@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
 const StoreLocator = () => {
-  const cities = ["São paulo", "Rio de janeiro", "Belo horizonte", "Ver todas"];
+  const cities = ["São paulo", "Rio de janeiro", "", "Ver todas"];
 
   return (
     <section className="bg-background-secondary py-10 lg:py-[75px]">
@@ -24,12 +24,12 @@ const StoreLocator = () => {
                   <input
                     type="text"
                     placeholder="CEP 22271-..."
-                    className="w-full h-[50px] bg-white border border-border-light rounded-lg py-3 px-4 text-sm placeholder:text-text-muted focus:ring-1 focus:ring-ring focus:border-ring outline-none"
-                  />
+                    className="w-full h-[50px] bg-white border border-border-light rounded-lg py-3 px-4 text-sm placeholder:text-text-muted focus:ring-1 focus:ring-ring focus:border-ring outline-none" />
+
                   <button
                     aria-label="Buscar CEP"
-                    className="absolute top-1/2 right-4 -translate-y-1/2 text-text-primary"
-                  >
+                    className="absolute top-1/2 right-4 -translate-y-1/2 text-text-primary">
+
                     <ArrowRight size={20} />
                   </button>
                 </div>
@@ -40,21 +40,21 @@ const StoreLocator = () => {
                   82 lojas, 41 Cidades
                 </p>
                 <div className="flex flex-wrap items-center gap-3 mt-4">
-                  {cities.map((city, index) => (
-                    <button
-                      key={city}
-                      className={`
+                  {cities.map((city, index) =>
+                  <button
+                    key={city}
+                    className={`
                         px-4 py-2 rounded-full text-sm font-medium transition-colors h-[38px]
                         ${
-                          index === cities.length - 1
-                            ? "bg-primary text-primary-foreground border-primary hover:bg-primary/90"
-                            : "bg-white border border-border-light text-text-secondary hover:bg-gray-100"
-                        }
-                      `}
-                    >
+                    index === cities.length - 1 ?
+                    "bg-primary text-primary-foreground border-primary hover:bg-primary/90" :
+                    "bg-white border border-border-light text-text-secondary hover:bg-gray-100"}
+                      `
+                    }>
+
                       {city}
                     </button>
-                  ))}
+                  )}
                 </div>
               </div>
             </div>
@@ -66,14 +66,14 @@ const StoreLocator = () => {
                 alt="Interior de uma loja Osklen com design minimalista, paredes de concreto, roupas brancas e móveis de madeira."
                 fill
                 sizes="(max-width: 1023px) 100vw, 60vw"
-                className="object-cover"
-              />
+                className="object-cover" />
+
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default StoreLocator;
