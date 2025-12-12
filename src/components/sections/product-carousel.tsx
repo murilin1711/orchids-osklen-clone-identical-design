@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useInView } from 'framer-motion';
+import { CheckCircle } from 'lucide-react';
 
 type Product = {
   id: number;
@@ -22,13 +23,13 @@ const products: Product[] = [
     id: 0,
     name: "Colégio Militar",
     price: "",
-    image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/cepmg_page-0001-removebg-preview-1765502385190.png?width=8000&height=8000&resize=contain",
-    image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/cepmg_page-0001-removebg-preview-1765502385190.png?width=8000&height=8000&resize=contain",
+    image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/cepmg_page-0001-removebg-preview-1765254630699.png",
+    image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/cepmg_page-0001-removebg-preview-1765254630699.png",
     href: "/escolas/colegio-militar",
     cta: "Comprar agora",
     featured: true,
-    badge: "Destaque",
-    accent: "#c9a04f"
+    badge: "Disponível",
+    accent: "#2e3091"
   },
   {
     id: 1,
@@ -163,48 +164,44 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = "", prefix = "" }) => 
 
 const ProductCard = ({ product }: { product: Product }) => {
   const isFeatured = product.featured;
-  const accent = product.accent || "#2e3091";
-  const actionContainer = isFeatured ? "space-y-3" : "flex justify-center";
 
   return (
-    <div className={`flex-shrink-0 ${isFeatured ? "w-[340px] md:w-[370px] lg:w-[400px]" : "w-[280px] md:w-[300px] lg:w-[320px]"}`}>
+    <div className={`flex-shrink-0 ${isFeatured ? "w-[300px] md:w-[320px] lg:w-[340px]" : "w-[280px] md:w-[300px] lg:w-[320px]"}`}>
       <a href={product.href || "#"} className="block group h-full">
-        <div className={`relative overflow-hidden rounded-2xl aspect-[3/4] flex items-center justify-center transition-all duration-500 ${isFeatured ? "bg-gradient-to-br from-[#0b1d2b] via-[#142f48] to-[#0b1d2b] border-2 border-[#c9a04f] shadow-[0_25px_80px_-30px_rgba(201,160,79,0.3)] hover:shadow-[0_35px_100px_-30px_rgba(201,160,79,0.4)]" : "bg-gradient-to-b from-gray-50 to-gray-100 border border-gray-200 group-hover:border-[#2e3091] group-hover:shadow-lg"}`}>
+        <div className={`relative overflow-hidden rounded-2xl aspect-[3/4] flex items-center justify-center transition-all duration-500 ${isFeatured ? "bg-gradient-to-b from-white to-gray-50 border-2 border-[#2e3091] shadow-lg shadow-[#2e3091]/10" : "bg-gradient-to-b from-gray-50 to-gray-100 border border-gray-200"} group-hover:border-[#2e3091] group-hover:shadow-lg`}>
           {product.badge && (
-            <span 
-              className="absolute top-4 left-4 z-20 px-3 py-1.5 rounded-full text-xs font-semibold tracking-tight shadow-lg"
-              style={{ backgroundColor: accent, color: '#0b1d2b' }}
-            >
+            <span className="absolute top-4 left-4 z-20 bg-[#2e3091] text-white px-3 py-1.5 rounded-full text-xs font-semibold tracking-tight shadow-md flex items-center gap-1">
+              <CheckCircle className="w-3 h-3" />
               {product.badge}
             </span>
           )}
 
-          <div className="absolute inset-0">
-            <Image
-              src={product.image1}
-              alt={product.name}
-              width={isFeatured ? 480 : 420}
-              height={isFeatured ? 640 : 560}
-              className={`${isFeatured ? "w-full h-full object-contain p-6 scale-100 group-hover:scale-105 transition-transform duration-700" : "w-full h-full object-contain p-6 opacity-30 transition-all duration-300 group-hover:opacity-70 group-hover:scale-105"}`}
-            />
+          <div className="absolute inset-0 flex items-center justify-center p-6">
+            <div className={`relative w-full h-full flex items-center justify-center ${isFeatured ? "scale-110" : ""}`}>
+              <Image
+                src={product.image1}
+                alt={product.name}
+                width={isFeatured ? 400 : 350}
+                height={isFeatured ? 500 : 450}
+                className="object-contain w-full h-full transition-transform duration-700 group-hover:scale-105"
+                style={{ 
+                  filter: isFeatured ? 'none' : 'brightness(1.1) opacity(0.8)'
+                }}
+              />
+            </div>
           </div>
 
-          <div className={`absolute inset-0 transition-all duration-500 ${isFeatured ? "bg-gradient-to-t from-[#0b1d2b]/90 via-[#0b1d2b]/50 to-transparent group-hover:from-[#0b1d2b]/80" : "bg-gradient-to-t from-black/0 via-transparent to-transparent group-hover:from-black/5"}`}></div>
-
-          <div className={`absolute bottom-6 left-6 right-6 z-20 ${actionContainer}`}>
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 w-[90%]">
             {isFeatured && (
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+              <div className="text-center mb-3">
+                <h3 className="text-lg font-semibold text-gray-900 bg-white/90 backdrop-blur-sm py-2 px-4 rounded-lg">
                   {product.name}
                 </h3>
-                <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/20 text-white/90 backdrop-blur-sm">
-                  Disponível
-                </span>
               </div>
             )}
-
+            
             <button
-              className={`${product.cta ? "w-full bg-[#c9a04f] text-[#0b1d2b] font-semibold hover:bg-[#d4b05a] shadow-lg hover:shadow-xl hover:-translate-y-0.5" : "bg-[#2e3091] text-white hover:bg-[#252a7a]"} px-6 py-3.5 rounded-lg text-sm transition-all duration-300 group-hover:scale-[1.02]`}
+              className={`w-full ${product.cta ? "bg-[#2e3091] hover:bg-[#252a7a] text-white" : "bg-gray-200 hover:bg-gray-300 text-gray-700"} px-6 py-3 rounded-lg text-sm font-medium transition-all duration-300 group-hover:scale-[1.02] shadow-md group-hover:shadow-lg`}
             >
               {product.cta ? product.cta : "Em breve"}
             </button>
