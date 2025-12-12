@@ -1,425 +1,404 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import type { CSSProperties } from "react";
-import Image from "next/image";
-import { ShoppingCart, Shield, Truck, RotateCcw, Star } from "lucide-react";
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import { Filter, ChevronDown, Star, ShoppingBag } from 'lucide-react';
 
+// Tipos
 type Product = {
   id: number;
   name: string;
-  description: string;
   price: number;
   originalPrice?: number;
   image: string;
   category: string;
-  sizes: string[];
-  colors: string[];
   rating: number;
-  reviews: number;
   inStock: boolean;
-  features: string[];
 };
 
+// Dados dos produtos
 const initialProducts: Product[] = [
   {
     id: 1,
-    name: "Camisa Polo Oficial",
-    description:
-      "Camisa polo em algodão penteado com detalhes bordados do colégio. Tecido respirável e duradouro.",
-    price: 89.9,
-    originalPrice: 109.9,
-    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1200",
-    category: "Camisas",
-    sizes: ["PP", "P", "M", "G", "GG"],
-    colors: ["Branco", "Azul", "Cinza"],
+    name: "Tênis Esportivo",
+    price: 299.90,
+    originalPrice: 349.90,
+    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=800",
+    category: "Corrida",
     rating: 4.8,
-    reviews: 124,
-    inStock: true,
-    features: ["100% algodão", "Bordado personalizado", "Lavagem fácil", "Resistente"],
+    inStock: true
   },
   {
     id: 2,
-    name: "Calça Social",
-    description:
-      "Calça social em tecido tecnológico com excelente caimento e conforto para o dia a dia escolar.",
-    price: 129.9,
-    originalPrice: 149.9,
-    image: "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=1200",
-    category: "Calças",
-    sizes: ["P", "M", "G", "GG"],
-    colors: ["Azul Marinho", "Preto", "Cinza Escuro"],
-    rating: 4.6,
-    reviews: 89,
-    inStock: true,
-    features: ["Tecido tecnológico", "Elasticidade", "Não amassa", "Bolsos seguros"],
+    name: "Tênis Casual",
+    price: 249.90,
+    originalPrice: 289.90,
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800",
+    category: "Todos",
+    rating: 4.5,
+    inStock: true
   },
   {
     id: 3,
-    name: "Jaqueta Colegial",
-    description: "Jaqueta impermeável com forro térmico e capuz. Ideal para dias frios e chuvosos.",
-    price: 159.9,
-    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200",
-    category: "Jaquetas",
-    sizes: ["P", "M", "G", "GG"],
-    colors: ["Azul Escuro", "Vermelho", "Verde Militar"],
-    rating: 4.9,
-    reviews: 156,
-    inStock: true,
-    features: ["Impermeável", "Forro térmico", "Capuz removível", "Bolsos internos"],
+    name: "Tênis Academia",
+    price: 279.90,
+    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800",
+    category: "Treino & academia",
+    rating: 4.7,
+    inStock: true
   },
   {
     id: 4,
-    name: "Bermuda Tactel",
-    description: "Bermuda em tactel com secagem rápida e costuras reforçadas para atividades físicas.",
-    price: 79.9,
-    originalPrice: 99.9,
-    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=1200",
-    category: "Bermudas",
-    sizes: ["P", "M", "G", "GG"],
-    colors: ["Azul Marinho", "Preto", "Verde"],
-    rating: 4.5,
-    reviews: 67,
-    inStock: true,
-    features: ["Tactel leve", "Secagem rápida", "Costuras reforçadas", "Elástico ajustável"],
+    name: "Tênis Performance",
+    price: 399.90,
+    originalPrice: 459.90,
+    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=800",
+    category: "Corrida",
+    rating: 4.9,
+    inStock: true
   },
   {
     id: 5,
-    name: "Kit Completo",
-    description:
-      "Kit com 2 camisetas, 1 calça e 1 jaqueta. Economize comprando o conjunto completo.",
-    price: 349.9,
-    originalPrice: 429.9,
-    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1200",
-    category: "Kits",
-    sizes: ["PP", "P", "M", "G", "GG"],
-    colors: ["Branco/Azul", "Cinza/Azul", "Completo"],
-    rating: 4.9,
-    reviews: 203,
-    inStock: true,
-    features: ["Kit completo", "Economia de 20%", "Tamanhos combinados", "Entrega especial"],
+    name: "Tênis Leve",
+    price: 229.90,
+    image: "https://images.unsplash.com/photo-1605348532760-6753d2c43329?auto=format&fit=crop&w=800",
+    category: "Tênis",
+    rating: 4.4,
+    inStock: true
   },
+  {
+    id: 6,
+    name: "Tênis Pro",
+    price: 459.90,
+    originalPrice: 499.90,
+    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=800",
+    category: "Corrida",
+    rating: 4.9,
+    inStock: true
+  }
 ];
 
 type SortOption = "default" | "price-low" | "price-high";
 
-const colorStyles: Record<string, CSSProperties> = {
-  Branco: { backgroundColor: "#ffffff" },
-  Azul: { backgroundColor: "#2e3091" },
-  Cinza: { backgroundColor: "#6b7280" },
-  "Azul Marinho": { backgroundColor: "#1e3a8a" },
-  Preto: { backgroundColor: "#0b0b0b" },
-  "Cinza Escuro": { backgroundColor: "#4b5563" },
-  Vermelho: { backgroundColor: "#dc2626" },
-  "Verde Militar": { backgroundColor: "#166534" },
-  Verde: { backgroundColor: "#16a34a" },
-  "Branco/Azul": { backgroundImage: "linear-gradient(135deg, #ffffff 50%, #2e3091 50%)" },
-  "Cinza/Azul": { backgroundImage: "linear-gradient(135deg, #6b7280 50%, #2e3091 50%)" },
-  Completo: {
-    backgroundImage:
-      "linear-gradient(135deg, #ffffff 0%, #ffffff 33%, #2e3091 33%, #2e3091 66%, #1e3a8a 66%, #1e3a8a 100%)",
-  },
-};
-
-const ColegioMilitarProducts = () => {
+const TennisStore = () => {
+  const [products, setProducts] = useState<Product[]>(initialProducts);
   const [sortBy, setSortBy] = useState<SortOption>("default");
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
+  const [showFilters, setShowFilters] = useState(false);
+  
+  // Categorias (baseado na imagem)
+  const categories = ["Todos", "Tênis", "Corrida", "Treino & academia", "Para prática de tênis", "Tilícias", "Literário"];
 
-  const categories = ["all", ...new Set(initialProducts.map((p) => p.category))];
-  const allSizes = Array.from(new Set(initialProducts.flatMap((p) => p.sizes)));
-  const allColors = Array.from(new Set(initialProducts.flatMap((p) => p.colors)));
+  // Aplicar filtros
+  useEffect(() => {
+    let filtered = [...initialProducts];
 
-  const products = useMemo(() => {
-    let data = [...initialProducts];
-
-    if (selectedCategory !== "all") {
-      data = data.filter((p) => p.category === selectedCategory);
+    // Filtrar por categoria
+    if (selectedCategory !== "Todos") {
+      filtered = filtered.filter(p => p.category === selectedCategory);
     }
 
-    if (selectedSizes.length > 0) {
-      data = data.filter((p) => p.sizes.some((size) => selectedSizes.includes(size)));
-    }
-
-    if (selectedColors.length > 0) {
-      data = data.filter((p) => p.colors.some((color) => selectedColors.includes(color)));
-    }
-
+    // Ordenar
     if (sortBy === "price-low") {
-      data.sort((a, b) => a.price - b.price);
+      filtered.sort((a, b) => a.price - b.price);
     } else if (sortBy === "price-high") {
-      data.sort((a, b) => b.price - a.price);
+      filtered.sort((a, b) => b.price - a.price);
     }
 
-    return data;
-  }, [selectedCategory, selectedSizes, selectedColors, sortBy]);
+    setProducts(filtered);
+  }, [sortBy, selectedCategory]);
 
-  const toggleSize = (size: string) => {
-    setSelectedSizes((prev) => (prev.includes(size) ? prev.filter((s) => s !== size) : [...prev, size]));
-  };
-
-  const toggleColor = (color: string) => {
-    setSelectedColors((prev) => (prev.includes(color) ? prev.filter((c) => c !== color) : [...prev, color]));
-  };
-
-  const clearFilters = () => {
+  // Limpar filtro
+  const clearFilter = () => {
+    setSelectedCategory("Todos");
     setSortBy("default");
-    setSelectedCategory("all");
-    setSelectedSizes([]);
-    setSelectedColors([]);
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
-      <div className="max-w-6xl mx-auto px-4 lg:px-6">
-        <section className="pt-10 pb-12">
-          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#2e3091] via-[#24266f] to-[#0f122f] text-white px-6 md:px-10 py-12">
-            <div className="absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_top,#ffffff1a,transparent_45%)]" />
-            <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
-            <div className="grid md:grid-cols-2 gap-10 items-center relative z-10">
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.2em]">Produtos Colégio Militar</div>
-                <h1 className="text-4xl md:text-5xl font-semibold leading-tight">Linha oficial com o conforto da nossa tecnologia</h1>
-                <p className="text-white/80 text-lg">
-                  Seleção curada de uniformes com ajuste preciso, tecidos tecnológicos e acabamento premium nas cores do colégio.
-                </p>
-                <div className="flex flex-wrap gap-3 text-sm">
-                  <span className="rounded-full bg-white/15 px-4 py-2 backdrop-blur">Entrega rápida</span>
-                  <span className="rounded-full bg-white/15 px-4 py-2 backdrop-blur">Garantia de qualidade</span>
-                  <span className="rounded-full bg-white/15 px-4 py-2 backdrop-blur">Troca fácil</span>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-2xl bg-white/10 border border-white/20 p-4 backdrop-blur">
-                  <p className="text-sm text-white/80">Itens disponíveis</p>
-                  <p className="text-3xl font-semibold">{initialProducts.length}</p>
-                  <div className="mt-4 flex items-center gap-2 text-sm">
-                    <Shield className="w-4 h-4" />
-                    Coleção oficial
-                  </div>
-                </div>
-                <div className="rounded-2xl bg-white/10 border border-white/20 p-4 backdrop-blur">
-                  <p className="text-sm text-white/80">Média de avaliações</p>
-                  <div className="flex items-end gap-2">
-                    <span className="text-3xl font-semibold">4.7</span>
-                    <Star className="w-5 h-5 fill-yellow-300 text-yellow-300" />
-                  </div>
-                  <p className="mt-2 text-sm text-white/80">Conforto e durabilidade</p>
-                </div>
-                <div className="col-span-2 rounded-2xl bg-white text-gray-900 p-4 shadow-lg">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm text-gray-500">Frete para Goiânia</p>
-                      <p className="text-xl font-semibold text-[#2e3091]">2-3 dias úteis</p>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm font-medium">
-                      <Truck className="w-4 h-4 text-[#2e3091]" />
-                      <RotateCcw className="w-4 h-4 text-[#2e3091]" />
-                    </div>
-                  </div>
-                </div>
+    <div className="min-h-screen bg-white">
+      {/* Cabeçalho Minimalista */}
+      <div className="border-b border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Tênis</h1>
+              <p className="text-sm text-gray-600 mt-1">187 RESULTADOS</p>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              {/* Botão de filtros para mobile */}
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className="md:hidden flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium"
+              >
+                <Filter className="w-4 h-4" />
+                Mostrar filtros
+              </button>
+              
+              {/* Ordenação */}
+              <div className="relative">
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as SortOption)}
+                  className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pl-10 pr-8 text-sm font-medium focus:outline-none focus:ring-1 focus:ring-gray-400"
+                >
+                  <option value="default">Ordenar por</option>
+                  <option value="price-low">Menor preço</option>
+                  <option value="price-high">Maior preço</option>
+                </select>
+                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" />
               </div>
             </div>
           </div>
-        </section>
-
-        <section className="sticky top-24 z-20 bg-white pb-6">
-          <div className="flex flex-wrap items-center gap-2 border-b border-gray-200 py-4">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                  selectedCategory === category
-                    ? "bg-[#2e3091] text-white shadow-md"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
-              >
-                {category === "all" ? "Todos" : category}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap items-center justify-between gap-4 py-4">
-            <div className="flex flex-wrap items-center gap-2">
-              {allSizes.map((size) => (
+          
+          {/* Categorias */}
+          <div className="mt-6 overflow-x-auto">
+            <div className="flex gap-2 pb-2">
+              {categories.map((category) => (
                 <button
-                  key={size}
-                  onClick={() => toggleSize(size)}
-                  className={`rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                    selectedSizes.includes(size)
-                      ? "bg-[#2e3091] text-white shadow-sm"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+                    selectedCategory === category
+                      ? 'bg-black text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  {size}
+                  {category}
                 </button>
               ))}
             </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2">
-                {allColors.map((color) => {
-                  const style = colorStyles[color] || { backgroundColor: "#e5e7eb" };
-                  return (
-                    <button
-                      key={color}
-                      onClick={() => toggleColor(color)}
-                      className={`flex items-center gap-2 rounded-full border px-3 py-1 text-sm transition-all duration-200 ${
-                        selectedColors.includes(color)
-                          ? "border-[#2e3091] text-[#2e3091] shadow-sm"
-                          : "border-gray-200 text-gray-700 hover:border-gray-300"
-                      }`}
-                    >
-                      <span
-                        className="h-4 w-4 rounded-full border border-gray-200"
-                        style={{ ...style }}
-                      />
-                      {color}
-                    </button>
-                  );
-                })}
-              </div>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-800 shadow-sm focus:border-[#2e3091] focus:outline-none"
-              >
-                <option value="default">Ordenar: Recomendado</option>
-                <option value="price-low">Menor preço</option>
-                <option value="price-high">Maior preço</option>
-              </select>
-              <button
-                onClick={clearFilters}
-                className="rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:border-[#2e3091] hover:text-[#2e3091] transition-colors"
-              >
-                Limpar filtros
-              </button>
-            </div>
           </div>
-        </section>
+        </div>
+      </div>
 
-        <section className="pb-16">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex flex-col">
-              <span className="text-xs uppercase tracking-[0.2em] text-gray-500">Produtos</span>
-              <h2 className="text-2xl font-semibold">{products.length} itens</h2>
-            </div>
-            <div className="flex items-center gap-3 text-sm text-gray-600">
-              <div className="flex items-center gap-2">
-                <Truck className="w-4 h-4 text-[#2e3091]" />
-                2-3 dias úteis
+      {/* Conteúdo Principal */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="flex gap-8">
+          {/* Filtros (Desktop - Escondido por padrão) */}
+          <div className={`hidden md:block w-64 flex-shrink-0 ${showFilters ? 'block' : 'hidden'}`}>
+            <div className="bg-gray-50 rounded-lg p-6 sticky top-8">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="font-semibold text-gray-900">Filtros</h2>
+                <button
+                  onClick={clearFilter}
+                  className="text-sm text-gray-600 hover:text-gray-900"
+                >
+                  Limpar
+                </button>
               </div>
-              <div className="flex items-center gap-2">
-                <RotateCcw className="w-4 h-4 text-[#2e3091]" />
-                Troca em 30 dias
+              
+              {/* Filtros disponíveis */}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-3">Categorias</h3>
+                  <div className="space-y-2">
+                    {categories.map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => setSelectedCategory(category)}
+                        className={`flex items-center justify-between w-full text-left px-2 py-1 rounded text-sm ${
+                          selectedCategory === category
+                            ? 'text-black font-medium'
+                            : 'text-gray-600 hover:text-gray-900'
+                        }`}
+                      >
+                        <span>{category}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                <div>
+                  <h3 className="font-medium text-gray-900 mb-3">Preço</h3>
+                  <div className="space-y-2">
+                    {["Até R$ 200", "R$ 200 - R$ 400", "R$ 400 - R$ 600", "Acima de R$ 600"].map((range) => (
+                      <button
+                        key={range}
+                        className="flex items-center justify-between w-full text-left px-2 py-1 rounded text-sm text-gray-600 hover:text-gray-900"
+                      >
+                        <span>{range}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {products.length === 0 ? (
-            <div className="rounded-2xl border border-gray-200 bg-gray-50 p-10 text-center">
-              <p className="text-gray-600 mb-4">Nenhum item encontrado com os filtros atuais.</p>
-              <button
-                onClick={clearFilters}
-                className="rounded-full bg-[#2e3091] px-6 py-3 text-white font-medium hover:bg-[#252a7a] transition-colors"
-              >
-                Ver todos os produtos
-              </button>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Lista de Produtos */}
+          <div className="flex-1">
+            {/* Filtro ativo */}
+            {selectedCategory !== "Todos" && (
+              <div className="mb-6 flex items-center gap-2 text-sm">
+                <span className="text-gray-600">Filtro ativo:</span>
+                <span className="font-medium">{selectedCategory}</span>
+                <button
+                  onClick={clearFilter}
+                  className="ml-2 text-gray-500 hover:text-gray-700"
+                >
+                  ×
+                </button>
+              </div>
+            )}
+
+            {/* Grid de Produtos */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {products.map((product) => (
                 <div
                   key={product.id}
-                  className="group rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                  className="group cursor-pointer"
                 >
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-t-2xl bg-gray-50">
+                  {/* Imagem do Produto */}
+                  <div className="relative aspect-square overflow-hidden bg-gray-100 rounded-lg mb-4">
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
+                    
+                    {/* Badge de desconto */}
                     {product.originalPrice && (
-                      <span className="absolute left-4 top-4 rounded-full bg-[#2e3091] px-3 py-1 text-xs font-semibold text-white">
+                      <div className="absolute top-3 left-3 bg-red-500 text-white px-2 py-1 rounded text-xs font-semibold">
                         -{Math.round((1 - product.price / product.originalPrice) * 100)}%
-                      </span>
+                      </div>
                     )}
+                    
+                    {/* Botão de compra */}
+                    <button className="absolute bottom-3 right-3 bg-black text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:scale-110">
+                      <ShoppingBag className="w-5 h-5" />
+                    </button>
                   </div>
-                  <div className="p-5 space-y-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="space-y-1">
-                        <p className="text-xs uppercase tracking-[0.2em] text-gray-500">{product.category}</p>
-                        <h3 className="text-lg font-semibold leading-tight">{product.name}</h3>
-                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                          <div className="flex items-center">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`h-4 w-4 ${
-                                  i < Math.floor(product.rating)
-                                    ? "fill-[#fbbf24] text-[#fbbf24]"
-                                    : "text-gray-300"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                          <span>({product.reviews})</span>
-                        </div>
+
+                  {/* Informações do Produto */}
+                  <div>
+                    <h3 className="font-medium text-gray-900 mb-1 line-clamp-1">
+                      {product.name}
+                    </h3>
+                    
+                    <div className="flex items-center gap-1 mb-2">
+                      <div className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-4 h-4 ${
+                              i < Math.floor(product.rating)
+                                ? 'text-yellow-400 fill-yellow-400'
+                                : 'text-gray-300'
+                            }`}
+                          />
+                        ))}
                       </div>
-                      <div className="text-right">
-                        {product.originalPrice && (
-                          <p className="text-sm text-gray-400 line-through">R$ {product.originalPrice.toFixed(2)}</p>
-                        )}
-                        <p className="text-2xl font-semibold text-[#2e3091]">R$ {product.price.toFixed(2)}</p>
-                        <p className="text-xs text-gray-500">ou 3x de R$ {(product.price / 3).toFixed(2)}</p>
-                      </div>
+                      <span className="text-xs text-gray-600">({product.rating})</span>
                     </div>
-
-                    <p className="text-sm text-gray-600 leading-relaxed">{product.description}</p>
-
-                    <div className="flex flex-wrap gap-2 text-xs font-medium text-gray-700">
-                      {product.features.slice(0, 3).map((feature) => (
-                        <span key={feature} className="rounded-full bg-gray-100 px-3 py-1">
-                          {feature}
+                    
+                    <div className="flex items-center gap-2">
+                      {product.originalPrice && (
+                        <span className="text-sm text-gray-500 line-through">
+                          R$ {product.originalPrice.toFixed(2)}
                         </span>
-                      ))}
+                      )}
+                      <span className="text-lg font-bold text-gray-900">
+                        R$ {product.price.toFixed(2)}
+                      </span>
                     </div>
-
-                    <div className="flex items-center justify-between pt-2">
-                      <div className="space-y-1 text-sm text-gray-700">
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium">Cores</span>
-                          <div className="flex items-center gap-1">
-                            {product.colors.map((color) => {
-                              const style = colorStyles[color] || { backgroundColor: "#e5e7eb" };
-                              return <span key={color} className="h-4 w-4 rounded-full border border-gray-200" style={{ ...style }} />;
-                            })}
-                          </div>
-                        </div>
-                        <p>Tamanhos: {product.sizes.join(", ")}</p>
-                      </div>
-                      <button
-                        className={`inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${
-                          product.inStock
-                            ? "bg-[#2e3091] text-white hover:bg-[#252a7a]"
-                            : "bg-gray-200 text-gray-500 cursor-not-allowed"
-                        }`}
-                        disabled={!product.inStock}
-                      >
-                        <ShoppingCart className="h-4 w-4" />
-                        {product.inStock ? "Adicionar" : "Esgotado"}
-                      </button>
+                    
+                    <div className="mt-2">
+                      <span className="text-xs text-gray-500">{product.category}</span>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          )}
-        </section>
+
+            {/* Mensagem se não houver produtos */}
+            {products.length === 0 && (
+              <div className="text-center py-12">
+                <p className="text-gray-500 mb-4">Nenhum produto encontrado com os filtros selecionados.</p>
+                <button
+                  onClick={clearFilter}
+                  className="text-black hover:text-gray-700 font-medium"
+                >
+                  Limpar filtros
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
+
+      {/* Filtros Mobile (Modal) */}
+      {showFilters && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden">
+          <div className="absolute right-0 top-0 h-full w-3/4 max-w-sm bg-white p-6 overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold text-gray-900">Filtros</h2>
+              <button
+                onClick={() => setShowFilters(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ×
+              </button>
+            </div>
+            
+            <div className="space-y-6">
+              <div>
+                <h3 className="font-medium text-gray-900 mb-3">Categorias</h3>
+                <div className="space-y-2">
+                  {categories.map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => {
+                        setSelectedCategory(category);
+                        setShowFilters(false);
+                      }}
+                      className={`flex items-center justify-between w-full text-left px-2 py-3 rounded-lg ${
+                        selectedCategory === category
+                          ? 'bg-gray-100 text-black font-medium'
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      <span>{category}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="font-medium text-gray-900 mb-3">Preço</h3>
+                <div className="space-y-2">
+                  {["Até R$ 200", "R$ 200 - R$ 400", "R$ 400 - R$ 600", "Acima de R$ 600"].map((range) => (
+                    <button
+                      key={range}
+                      className="flex items-center justify-between w-full text-left px-2 py-3 rounded-lg text-gray-600 hover:text-gray-900"
+                    >
+                      <span>{range}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <div className="mt-8 pt-6 border-t border-gray-200">
+              <button
+                onClick={clearFilter}
+                className="w-full py-3 border border-gray-300 rounded-lg text-sm font-medium mb-3"
+              >
+                Limpar todos os filtros
+              </button>
+              <button
+                onClick={() => setShowFilters(false)}
+                className="w-full py-3 bg-black text-white rounded-lg text-sm font-medium"
+              >
+                Ver produtos
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default ColegioMilitarProducts;
+export default TennisStore;
