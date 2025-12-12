@@ -20,76 +20,88 @@ type Product = {
 const products: Product[] = [
   {
     id: 0,
+    name: "Colégio Militar",
+    price: "",
+    image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/cepmg_page-0001-removebg-preview-1765254630699.png",
+    image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/cepmg_page-0001-removebg-preview-1765254630699.png",
+    href: "/escolas/colegio-militar",
+    cta: "Comprar agora",
+    featured: true,
+    badge: "Destaque",
+    accent: "#c9a04f"
+  },
+  {
+    id: 1,
     name: "Adonai",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goias_minas.pdf__1_-removebg-preview-1765246693154.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goias_minas.pdf__1_-removebg-preview-1765246693154.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 1,
+    id: 2,
     name: "Colégio Delta",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goias_minas.pdf__2_-removebg-preview-1765246749643.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goias_minas.pdf__2_-removebg-preview-1765246749643.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 2,
+    id: 3,
     name: "Escola Modelo",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goias_minas.pdf__3_-removebg-preview-1765246834589.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/goias_minas.pdf__3_-removebg-preview-1765246834589.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 3,
+    id: 4,
     name: "Escola Educare",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/1-removebg-preview-1765247533532.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/1-removebg-preview-1765247533532.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 4,
+    id: 5,
     name: "Escola Educar",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2-removebg-preview-1765247533630.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2-removebg-preview-1765247533630.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 5,
+    id: 6,
     name: "Escola Pinguinho de Gente",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/3-removebg-preview-1765247533847.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/3-removebg-preview-1765247533847.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 6,
+    id: 7,
     name: "Educandário Dom Pedro II",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/4-removebg-preview-1765247533750.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/4-removebg-preview-1765247533750.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 7,
+    id: 8,
     name: "Villa Galileu",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2-removebg-preview-1-1765249932421.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/2-removebg-preview-1-1765249932421.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 8,
+    id: 9,
     name: "DOM",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/1-removebg-preview-1-1765249932384.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/1-removebg-preview-1-1765249932384.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 9,
+    id: 10,
     name: "Colégio Galileu",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/3-removebg-preview-1-1765249932104.png?width=8000&height=8000&resize=contain",
     image2: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/3-removebg-preview-1-1765249932104.png?width=8000&height=8000&resize=contain"
   },
   {
-    id: 10,
+    id: 11,
     name: "Colégio São Francisco de Assis",
     price: "",
     image1: "https://slelguoygbfzlpylpxfs.supabase.co/storage/v1/render/image/public/document-uploads/4-removebg-preview-1-1765249932417.png?width=8000&height=8000&resize=contain",
@@ -155,11 +167,14 @@ const ProductCard = ({ product }: { product: Product }) => {
   const actionContainer = isFeatured ? "space-y-3" : "flex justify-center";
 
   return (
-    <div className={`flex-shrink-0 ${isFeatured ? "w-[320px] md:w-[350px] lg:w-[380px]" : "w-[280px] md:w-[300px] lg:w-[320px]"}`}>
+    <div className={`flex-shrink-0 ${isFeatured ? "w-[340px] md:w-[370px] lg:w-[400px]" : "w-[280px] md:w-[300px] lg:w-[320px]"}`}>
       <a href={product.href || "#"} className="block group h-full">
-        <div className={`relative overflow-hidden rounded-2xl aspect-[3/4] flex items-center justify-center transition-all duration-500 ${isFeatured ? "bg-gradient-to-br from-[#0b1d2b] via-[#142f48] to-[#0b1d2b] border border-[#c9a04f] shadow-[0_25px_80px_-30px_rgba(11,29,43,0.9)]" : "bg-gradient-to-b from-gray-50 to-gray-100 border border-gray-200 group-hover:border-[#2e3091] group-hover:shadow-lg"}`}>
+        <div className={`relative overflow-hidden rounded-2xl aspect-[3/4] flex items-center justify-center transition-all duration-500 ${isFeatured ? "bg-gradient-to-br from-[#0b1d2b] via-[#142f48] to-[#0b1d2b] border-2 border-[#c9a04f] shadow-[0_25px_80px_-30px_rgba(201,160,79,0.3)] hover:shadow-[0_35px_100px_-30px_rgba(201,160,79,0.4)]" : "bg-gradient-to-b from-gray-50 to-gray-100 border border-gray-200 group-hover:border-[#2e3091] group-hover:shadow-lg"}`}>
           {product.badge && (
-            <span className="absolute top-4 left-4 z-20 bg-white/90 text-[#0b1d2b] px-3 py-1 rounded-full text-xs font-semibold tracking-tight shadow-md">
+            <span 
+              className="absolute top-4 left-4 z-20 px-3 py-1.5 rounded-full text-xs font-semibold tracking-tight shadow-lg"
+              style={{ backgroundColor: accent, color: '#0b1d2b' }}
+            >
               {product.badge}
             </span>
           )}
@@ -168,28 +183,28 @@ const ProductCard = ({ product }: { product: Product }) => {
             <Image
               src={product.image1}
               alt={product.name}
-              width={420}
-              height={560}
-              className={`${isFeatured ? "w-full h-full object-cover opacity-80 group-hover:opacity-100 scale-105 transition-all duration-700" : "w-full h-full object-contain p-6 opacity-30 transition-all duration-300 group-hover:opacity-70 group-hover:scale-105"}`}
+              width={isFeatured ? 480 : 420}
+              height={isFeatured ? 640 : 560}
+              className={`${isFeatured ? "w-full h-full object-contain p-6 scale-100 group-hover:scale-105 transition-transform duration-700" : "w-full h-full object-contain p-6 opacity-30 transition-all duration-300 group-hover:opacity-70 group-hover:scale-105"}`}
             />
           </div>
 
-          <div className={`absolute inset-0 transition-all duration-500 ${isFeatured ? "bg-gradient-to-t from-black/45 via-black/25 to-transparent group-hover:from-black/35" : "bg-gradient-to-t from-black/0 via-transparent to-transparent group-hover:from-black/5"}`}></div>
+          <div className={`absolute inset-0 transition-all duration-500 ${isFeatured ? "bg-gradient-to-t from-[#0b1d2b]/90 via-[#0b1d2b]/50 to-transparent group-hover:from-[#0b1d2b]/80" : "bg-gradient-to-t from-black/0 via-transparent to-transparent group-hover:from-black/5"}`}></div>
 
-          <div className={`absolute bottom-6 left-5 right-5 z-20 ${actionContainer}`}>
+          <div className={`absolute bottom-6 left-6 right-6 z-20 ${actionContainer}`}>
             {isFeatured && (
-              <div className="flex items-center justify-between text-white">
-                <h3 className="text-xl md:text-2xl font-semibold tracking-tight">
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">
                   {product.name}
                 </h3>
-                <span className="px-3 py-1 rounded-full text-[11px] font-semibold" style={{ backgroundColor: "rgba(201,160,79,0.18)", color: accent }}>
-                  Destaque
+                <span className="px-3 py-1 rounded-full text-[11px] font-semibold bg-white/20 text-white/90 backdrop-blur-sm">
+                  Disponível
                 </span>
               </div>
             )}
 
             <button
-              className={`${product.cta ? "w-full bg-[#c9a04f] text-[#0b1d2b] font-semibold shadow-[0_14px_40px_-18px_rgba(201,160,79,0.95)] hover:shadow-[0_18px_55px_-18px_rgba(201,160,79,0.9)] hover:-translate-y-0.5" : "bg-[#2e3091] text-white hover:bg-[#252a7a]"} px-8 py-3 rounded-lg text-sm transition-all duration-300 group-hover:scale-[1.02]`}
+              className={`${product.cta ? "w-full bg-[#c9a04f] text-[#0b1d2b] font-semibold hover:bg-[#d4b05a] shadow-lg hover:shadow-xl hover:-translate-y-0.5" : "bg-[#2e3091] text-white hover:bg-[#252a7a]"} px-6 py-3.5 rounded-lg text-sm transition-all duration-300 group-hover:scale-[1.02]`}
             >
               {product.cta ? product.cta : "Em breve"}
             </button>
@@ -234,14 +249,35 @@ const ProductCarousel = () => {
           </div>
         </div>
 
+        {/* Carrossel de produtos */}
+        <div className="relative mb-10 md:mb-14">
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="flex gap-6 md:gap-8 pb-4 px-4">
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          </div>
+          
+          {/* Indicador visual de scroll */}
+          <div className="flex justify-center mt-6">
+            <div className="flex items-center gap-1 text-gray-400 text-sm">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+              <span>Arraste para ver mais</span>
+            </div>
+          </div>
+        </div>
+
         {/* Estatísticas animadas */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-10 md:mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           <div className="bg-white rounded-2xl p-6 md:p-8 text-center shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300">
             <div className="mb-3">
               <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-3">
                 <span className="text-2xl text-[#2e3091]">🏫</span>
               </div>
-              <AnimatedCounter end={40} suffix=" anos" />
+              <AnimatedCounter end={40} prefix="+ " suffix=" anos" />
             </div>
             <p className="text-gray-600 text-sm md:text-base font-medium">
               de experiência no mercado
@@ -253,7 +289,7 @@ const ProductCarousel = () => {
               <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-3">
                 <span className="text-2xl text-[#2e3091]">👨‍👩‍👧‍👦</span>
               </div>
-              <AnimatedCounter end={10000} suffix=" clientes" />
+              <AnimatedCounter end={10000} prefix="+ " suffix=" clientes" />
             </div>
             <p className="text-gray-600 text-sm md:text-base font-medium">
               atendidos com excelência
@@ -265,31 +301,11 @@ const ProductCarousel = () => {
               <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mx-auto mb-3">
                 <span className="text-2xl text-[#2e3091]">🤝</span>
               </div>
-              <AnimatedCounter end={11} suffix=" escolas" />
+              <AnimatedCounter end={12} prefix="+ " suffix=" escolas" />
             </div>
             <p className="text-gray-600 text-sm md:text-base font-medium">
               parceiras satisfeitas
             </p>
-          </div>
-        </div>
-
-        {/* Carrossel de produtos */}
-        <div className="relative">
-          <div className="overflow-x-auto scrollbar-hide">
-            <div className="flex gap-6 md:gap-8 pb-4 px-4">
-              {products.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
-          </div>
-
-          <div className="flex justify-center mt-6">
-            <div className="flex items-center gap-1 text-gray-400 text-sm">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-              <span>Arraste para ver mais</span>
-            </div>
           </div>
         </div>
       </div>
