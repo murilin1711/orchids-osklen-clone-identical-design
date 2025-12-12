@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import {
   ChevronDown,
   Plus,
+  ShoppingBag,
+  Search,
   Menu,
   X,
-  Grid2X2,
-  Grid3X3,
-  Square,
 } from "lucide-react";
 
 /**
@@ -101,9 +100,6 @@ export default function LojaEstiloOsklen() {
   const [showFiltersModal, setShowFiltersModal] = useState(false);
   const [search, setSearch] = useState("");
 
-  // GRID MODE: 4 => padrão (mobile 2 / desktop 4), 2 => duas colunas fixas, 1 => lista
-  const [gridMode, setGridMode] = useState<1 | 2 | 4>(4);
-
   useEffect(() => {
     // aplica filtro por categoria + busca + ordenação
     let filtered = [...products];
@@ -127,18 +123,6 @@ export default function LojaEstiloOsklen() {
 
     setQueryProducts(filtered);
   }, [products, selectedCategory, sortBy, search]);
-
-  const changeGrid = () => {
-    // ciclo 4 -> 2 -> 1 -> 4
-    if (gridMode === 4) setGridMode(2);
-    else if (gridMode === 2) setGridMode(1);
-    else setGridMode(4);
-  };
-
-  const gridIcon =
-    gridMode === 2 ? <Grid2X2 className="w-4 h-4" /> :
-    gridMode === 4 ? <Grid3X3 className="w-4 h-4" /> :
-    <Square className="w-4 h-4" />;
 
   /* layout colors / typography choices */
   const primaryText = "text-gray-900";
@@ -164,9 +148,6 @@ export default function LojaEstiloOsklen() {
               </div>
             </div>
           </div>
-
-          {/* removed search (kept state in case used elsewhere) */}
-
           {/* right - icons */}
           <div className="flex items-center gap-4">
             <button
@@ -177,20 +158,14 @@ export default function LojaEstiloOsklen() {
               Filtrar
             </button>
 
-            {/* GRID SWITCH BUTTON - canto para mudar o grid (substitui o botão da sacola) */}
-            <button
-              onClick={changeGrid}
-              className="p-2 rounded border border-neutral-200 hover:bg-neutral-100 transition"
-              aria-label="Alterar visualização do grid"
-              title="Mudar visualização"
-            >
-              {gridIcon}
+            <button className="p-2 rounded hover:bg-neutral-100">
+              <ShoppingBag className="w-5 h-5" />
             </button>
           </div>
         </div>
       </header>
 
-      {/* ===== Top controls: categorias (pills) e ordenação with icon ↓ ===== */}
+      {/* ===== Top controls: categorias (pills) e ordenação com ícone ↓ ===== */}
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           {/* categorias pills */}
@@ -238,14 +213,7 @@ export default function LojaEstiloOsklen() {
 
       {/* ===== Grid principal (cards estilo Osklen) ===== */}
       <main className="max-w-7xl mx-auto px-6 pb-16">
-        <div
-          className={`
-            grid gap-8
-            ${gridMode === 1 ? "grid-cols-1" : ""}
-            ${gridMode === 2 ? "grid-cols-2" : ""}
-            ${gridMode === 4 ? "grid-cols-2 lg:grid-cols-4" : ""}
-          `}
-        >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {queryProducts.map((p) => (
             <article
               key={p.id}
@@ -292,4 +260,132 @@ export default function LojaEstiloOsklen() {
                   {/* bolinhas de cor + "+3" (visual parecido com Osklen) */}
                   <div className="flex items-center gap-2 ml-auto">
                     <div className="w-3 h-3 rounded-full bg-black" />
-                    <div className="w-3 h-3 rou
+                    <div className="w-3 h-3 rounded-full bg-neutral-600" />
+                    <div className="w-3 h-3 rounded-full bg-neutral-300" />
+                    <span className="text-xs text-neutral-500">+3</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* mensagem caso não haja produtos */}
+        {queryProducts.length === 0 && (
+          <div className="py-16 text-center text-neutral-500">
+            Nenhum produto encontrado.{" "}
+            <button
+              onClick={() => {
+                setSelectedCategory("Todos");
+                setSortBy("default");
+                setSearch("");
+              }}
+              className="ml-2 underline"
+            >
+              Limpar filtros
+            </button>
+          </div>
+        )}
+      </main>
+
+      {/* ===== Modal de filtros (clean) ===== */}
+      {showFiltersModal && (
+        <div className="fixed inset-0 z-50 flex">
+          {/* overlay */}
+          <div
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setShowFiltersModal(false)}
+          />
+
+          {/* painel lateral */}
+          <aside className="relative ml-auto w-full max-w-sm bg-white h-full shadow-xl p-6 overflow-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-lg font-medium">Filtros</h2>
+              <button
+                onClick={() => setShowFiltersModal(false)}
+                className="p-1 rounded hover:bg-neutral-100"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="space-y-6 text-sm text-neutral-700">
+              {/* Categoria (opções simples) */}
+              <div>
+                <div className="font-medium mb-2">Categoria</div>
+                <div className="flex flex-col gap-2">
+                  {categories.map((c) => (
+                    <button
+                      key={c}
+                      onClick={() => setSelectedCategory(c)}
+                      className={`text-left px-3 py-2 rounded ${selectedCategory === c ? "bg-black text-white" : "bg-neutral-50 hover:bg-neutral-100"}`}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Preço (simples) */}
+              <div>
+                <div className="font-medium mb-2">Faixa de preço</div>
+                <div className="flex gap-2 flex-wrap">
+                  {["Até R$100", "R$100–R$300", "R$300–R$600", "Acima R$600"].map((r) => (
+                    <button key={r} className="px-3 py-2 rounded bg-neutral-50 hover:bg-neutral-100 text-sm">
+                      {r}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Disponibilidade (apenas visual) */}
+              <div>
+                <div className="font-medium mb-2">Disponibilidade</div>
+                <div className="flex flex-col gap-2">
+                  <label className="flex items-center gap-2">
+                    <input type="checkbox" className="w-4 h-4" />
+                    <span className="text-sm">Em estoque</span>
+                  </label>
+                  <label className="flex items-center gap-2">
+                    <input type="checkbox" className="w-4 h-4" />
+                    <span className="text-sm">Pré-venda</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 flex gap-3">
+              <button
+                onClick={() => {
+                  setSelectedCategory("Todos");
+                  setSortBy("default");
+                  setShowFiltersModal(false);
+                }}
+                className="flex-1 border border-neutral-200 py-3 rounded text-sm"
+              >
+                Limpar tudo
+              </button>
+              <button
+                onClick={() => setShowFiltersModal(false)}
+                className="flex-1 bg-black text-white py-3 rounded text-sm"
+              >
+                Aplicar
+              </button>
+            </div>
+          </aside>
+        </div>
+      )}
+
+      {/* pequenas animações / helpers */}
+      <style>{`
+        /* para truncar nomes se precisar */
+        .line-clamp-1 { 
+          display: -webkit-box; 
+          -webkit-line-clamp: 1; 
+          -webkit-box-orient: vertical; 
+          overflow: hidden;
+        }
+      `}</style>
+    </div>
+  );
+}
