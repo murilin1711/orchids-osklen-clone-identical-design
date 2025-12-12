@@ -152,15 +152,6 @@ export default function LojaEstiloOsklen() {
           {/* center - search (discreto) */}
           <div className="hidden md:flex items-center gap-3 flex-1 max-w-md mx-auto">
             <div className="relative w-full">
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Busque por produto ou categoria"
-                className="w-full border border-neutral-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-neutral-300"
-              />
-              <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-neutral-400" />
-            </div>
-          </div>
 
           {/* right - icons */}
           <div className="flex items-center gap-4">
