@@ -242,22 +242,27 @@ export default function Produto1Page() {
 
                   <div className="flex gap-3">
                     <button
-                      onClick={() => setSexo("m")}
-                      className={`flex-1 py-3 border rounded-md text-sm font-medium ${
-                        sexo === "m" ? "border-[#2e3091] text-[#2e3091]" : "border-neutral-200"
-                      } cursor-pointer`}
-                    >
-                      ♂
-                    </button>
+  onClick={() => setSexo("m")}
+  className={`flex-1 py-3 border rounded-md text-sm font-semibold transition ${
+    sexo === "m"
+      ? "border-[#2e3091] text-[#2e3091] bg-blue-50"
+      : "border-neutral-200 text-neutral-700 hover:bg-neutral-50"
+  } cursor-pointer`}
+>
+  Masculino
+</button>
 
-                    <button
-                      onClick={() => setSexo("f")}
-                      className={`flex-1 py-3 border rounded-md text-sm font-medium ${
-                        sexo === "f" ? "border-[#2e3091] text-[#2e3091]" : "border-neutral-200"
-                      } cursor-pointer`}
-                    >
-                      ♀
-                    </button>
+<button
+  onClick={() => setSexo("f")}
+  className={`flex-1 py-3 border rounded-md text-sm font-semibold transition ${
+    sexo === "f"
+      ? "border-[#2e3091] text-[#2e3091] bg-blue-50"
+      : "border-neutral-200 text-neutral-700 hover:bg-neutral-50"
+  } cursor-pointer`}
+>
+  Feminino
+</button>
+
                   </div>
 
                   <div className="flex gap-3 mt-auto">
