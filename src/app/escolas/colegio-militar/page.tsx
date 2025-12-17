@@ -166,7 +166,7 @@ export default function LojaEstiloOsklen() {
 
   // Função para navegar para a página do produto
   const handleProductClick = (productId: number) => {
-    router.push(`/escolas/colegio-militar/produto1?id=${productId}`);
+    router.push(`/escolas/colegio-militar/produto1.tsx?id=${productId}`);
   };
 
   useEffect(() => {
