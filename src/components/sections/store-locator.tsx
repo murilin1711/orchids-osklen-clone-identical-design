@@ -124,7 +124,11 @@ const StoreLocator = () => {
         </div>
         {/* Texto adicional */}
         <div className="text-center mt-12 max-w-3xl mx-auto">
-          <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-between bg-gradient-to-br from-gray-50 to-gray-100">
+          <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-between 
+                bg-gradient-to-br from-gray-50 to-gray-100 
+                rounded-2xl 
+                shadow-[0_10px_30px_rgba(0,0,0,0.08)]">
+
 
             <h4 className="text-xl font-semibold text-[#2e3091] mb-4">
               Por que visitar nossa loja física?
