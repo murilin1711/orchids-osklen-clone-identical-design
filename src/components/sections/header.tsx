@@ -31,7 +31,7 @@ const Header = () => {
         <div className="hidden lg:flex fixed top-0 left-0 right-0 h-[80px] items-center z-50">
           <div className="w-full h-full flex items-center justify-between px-8 xl:px-12 2xl:px-16">
             {/* Left Navigation */}
-            <div className="flex items-center" onMouseLeave={() => setActiveSubmenu(null)}>
+            <div className="flex items-center">
               <nav className="bg-white/50 backdrop-blur-md rounded-xl h-[40px] items-center shadow-sm flex">
                 <ul className="flex items-center gap-1 px-2">
                   {navItems.map((item) => (
@@ -39,7 +39,6 @@ const Header = () => {
                       {item === "Sobre" ? (
                         <Link
                           href="/sobre"
-                          onMouseEnter={() => setActiveSubmenu(item)}
                           className="font-suisse font-normal text-[14px] -tracking-[0.02em] text-black hover:bg-white/80 h-[34px] px-3 rounded-lg transition-all duration-300 whitespace-nowrap group-hover:scale-105 group-hover:shadow-sm"
                         >
                           {item}
@@ -202,8 +201,8 @@ const Header = () => {
         {/* Submenu Overlay */}
         <div
           id="submenu"
-          data-menu-open={activeSubmenu !== null}
-          onMouseEnter={() => { if (activeSubmenu !== null) setActiveSubmenu(activeSubmenu); }}
+          data-menu-open={activeSubmenu !== null && activeSubmenu !== "Sobre"} // Sobre não abre submenu
+          onMouseEnter={() => { if (activeSubmenu !== null && activeSubmenu !== "Sobre") setActiveSubmenu(activeSubmenu); }}
           onMouseLeave={() => setActiveSubmenu(null)}
           className="hidden lg:block absolute top-20 left-8 xl:left-12 2xl:left-16 right-8 xl:right-12 2xl:right-16 rounded-xl bg-white/[0.85] backdrop-blur-[20px] opacity-0 max-h-0 data-[menu-open=true]:opacity-100 data-[menu-open=true]:max-h-96 overflow-hidden transition-[max-height,opacity] duration-300 ease-[cubic-bezier(.16,1,.3,1)] shadow-xl z-[55] border border-white/20"
         >
@@ -214,10 +213,21 @@ const Header = () => {
                 data-active={activeSubmenu === item}
                 className="col-start-1 row-start-1 h-full min-h-[300px] pt-20 p-8 transition-opacity duration-200 opacity-0 pointer-events-none data-[active=true]:opacity-100 data-[active=true]:pointer-events-auto"
               >
-                <div className="text-center">
-                  <h3 className="text-2xl font-semibold text-[#2e3091] mb-4">{item}</h3>
-                  <p className="text-gray-600">Conteúdo do submenu para {item}</p>
-                </div>
+                {item === "Escolas" ? (
+                  <div className="flex flex-col items-center gap-4">
+                    <Link
+                      href="/colegio-militar"
+                      className="text-[#2e3091] font-bold text-lg hover:underline"
+                    >
+                      Colégio Militar
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="text-center">
+                    <h3 className="text-2xl font-semibold text-[#2e3091] mb-4">{item}</h3>
+                    <p className="text-gray-600">Conteúdo do submenu para {item}</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>
