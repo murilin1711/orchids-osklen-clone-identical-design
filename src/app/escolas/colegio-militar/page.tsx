@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/navigation"; // Adicionado
 import {
   ChevronDown,
   Plus,
@@ -18,6 +19,7 @@ import {
  * - carousel com swipe por produto
  * - botão de adicionar sobre a foto que abre modal de seleção de tamanho
  * - controle de colunas no desktop (1-4). Mobile padrão 2.
+ * - Adicionado: clique no produto redireciona para src/app/escolas/colegio-militar/produto1.tsx
  */
 
 /* -------------------- Tipos -------------------- */
@@ -109,6 +111,7 @@ const initialProducts: Product[] = [
 
 /* -------------------- Componente -------------------- */
 export default function LojaEstiloOsklen() {
+  const router = useRouter(); // Adicionado
   const [products, setProducts] = useState<Product[]>(
     // garante que todo produto tenha a propriedade images (compatibilidade)
     initialProducts.map((p) => ({
@@ -160,6 +163,11 @@ export default function LojaEstiloOsklen() {
   const [modalProduct, setModalProduct] = useState<Product | null>(null);
   const [modalSelectedSize, setModalSelectedSize] = useState<string | null>(null);
   const [cart, setCart] = useState<Array<{ product: Product; size: string | null }>>([]);
+
+  // Função para navegar para a página do produto
+  const handleProductClick = (productId: number) => {
+    router.push(`/escolas/colegio-militar/produto1?id=${productId}`);
+  };
 
   useEffect(() => {
     // aplica filtro por categoria + busca + ordenação
@@ -374,6 +382,7 @@ export default function LojaEstiloOsklen() {
                 key={p.id}
                 className="group relative cursor-pointer"
                 aria-labelledby={`product-${p.id}`}
+                onClick={() => handleProductClick(p.id)} // Adicionado
               >
                 {/* imagem grande com aspect ratio parecido */}
                 <div className="relative w-full overflow-hidden rounded-2xl bg-neutral-100 aspect-[9/12]">
@@ -401,7 +410,7 @@ export default function LojaEstiloOsklen() {
                       <>
                         <button
                           onClick={(ev) => {
-                            ev.stopPropagation();
+                            ev.stopPropagation(); // Evita navegação ao clicar nas setas
                             prevImage(p.id, imgs.length);
                           }}
                           className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow hover:shadow-md"
@@ -411,7 +420,7 @@ export default function LojaEstiloOsklen() {
                         </button>
                         <button
                           onClick={(ev) => {
-                            ev.stopPropagation();
+                            ev.stopPropagation(); // Evita navegação ao clicar nas setas
                             nextImage(p.id, imgs.length);
                           }}
                           className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 shadow hover:shadow-md"
@@ -426,7 +435,7 @@ export default function LojaEstiloOsklen() {
                             <button
                               key={i}
                               onClick={(ev) => {
-                                ev.stopPropagation();
+                                ev.stopPropagation(); // Evita navegação ao clicar nos dots
                                 setActiveIndex(p.id, i);
                               }}
                               className={`w-2 h-2 rounded-full ${i === idx ? "bg-black" : "bg-white/70 border border-neutral-200"}`}
@@ -441,7 +450,7 @@ export default function LojaEstiloOsklen() {
                     <button
                       aria-label="Adicionar ao carrinho"
                       onClick={(ev) => {
-                        ev.stopPropagation();
+                        ev.stopPropagation(); // Evita navegação ao clicar no botão de adicionar
                         openAddToCart(p);
                       }}
                       className="absolute left-1/2 -translate-x-1/2 bottom-6 bg-white rounded-full p-3 shadow-md hover:shadow-lg transition-transform transform active:scale-95"
