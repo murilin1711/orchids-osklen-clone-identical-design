@@ -1,3 +1,4 @@
+// TESTE-DE-SYNC-GIT-123
 "use client";
 
 import { useEffect, useState, useRef } from "react";
