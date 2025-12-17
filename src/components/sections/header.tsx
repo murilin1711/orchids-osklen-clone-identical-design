@@ -216,7 +216,7 @@ const Header = () => {
                 {item === "Escolas" ? (
                   <div className="flex flex-col items-center gap-4">
                     <Link
-                      href="/colegio-militar"
+                      href="/escolas/colegio-militar"
                       className="text-[#2e3091] font-bold text-lg hover:underline"
                     >
                       Colégio Militar
